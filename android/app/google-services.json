@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "807712417415",
+    "project_id": "babyv-care",
+    "storage_bucket": "babyv-care.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:807712417415:android:7d4de21fd535ebbc273a22",
+        "android_client_info": {
+          "package_name": "com.newapp.babyv_care"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "807712417415-q62g61cra75ti8c12ds5kh6e1o9h78i5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8_3ACXXMCiGL7HvHc5wTlIwWwOUlyqUA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "807712417415-q62g61cra75ti8c12ds5kh6e1o9h78i5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
