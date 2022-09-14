@@ -1,7 +1,8 @@
-import 'package:babyv_care/screens/splash/splash_screen.dart';
 import 'package:babyv_care/utils/routes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+
+import 'screens/splash-to-home/splash/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

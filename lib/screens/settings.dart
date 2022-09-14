@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 import '../utils/constants.dart';
 import '../utils/dafault_button.dart';
-import 'sign_in/sign_in_screen.dart';
+import '../utils/enums.dart';
+import 'custtom_bottom_nav_bar.dart';
+import 'splash-to-home/sign_in_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
   static String routeName = "/settingscreen";
@@ -71,6 +73,7 @@ class SettingsScreen extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar: CustomBottomNavBar(selectedMenu: MenuState.profile),
     );
   }
 

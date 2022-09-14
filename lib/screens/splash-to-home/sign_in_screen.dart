@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../utils/dafault_button.dart';
 import '../../utils/size_config.dart';
-import '../otp/otp_screen.dart';
+import 'otp_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   static String routeName = "/loginscreen";
@@ -13,6 +13,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController _controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,6 +56,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   maxLength: 10,
                   keyboardType: TextInputType.number,
                   controller: _controller,
+                  validator: (value) {
+                    if (value == 10) {
+                      return 'Please Enter Your Mobile Number';
+                    }
+                    return null;
+                  },
                 ),
               )
             ]),
@@ -66,7 +73,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 press: () {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => OtpScreen(_controller.text)));
-                  // Navigator.pushNamed(context, OtpScreen.routeName);
                 }),
           ],
         ),

@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 
-import '../../../utils/constants.dart';
-import '../../../utils/size_config.dart';
+import '../../../../../utils/constants.dart';
+import '../../../../../utils/size_config.dart';
 
 class DiscountBanner extends StatelessWidget {
   const DiscountBanner({

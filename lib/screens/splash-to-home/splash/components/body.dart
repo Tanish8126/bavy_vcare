@@ -1,11 +1,7 @@
-import 'package:babyv_care/screens/sign_in/sign_in_screen.dart';
+import 'package:babyv_care/screens/home/homescreen.dart';
 import 'package:flutter/material.dart';
 
-import '../../../utils/constants.dart';
-import '../../../utils/dafault_button.dart';
-import '../../../utils/size_config.dart';
-import '../../otp/otp_screen.dart';
-import '../components/splash_content.dart';
+import '../../../../utils/dafault_button.dart';
 
 class Body extends StatefulWidget {
   @override
@@ -29,14 +25,6 @@ class _BodyState extends State<Body> {
           padding: const EdgeInsets.only(top: 50, left: 10, right: 10),
           child: Column(
             children: <Widget>[
-              // Text(
-              //   "Baby V Care",
-              //   style: TextStyle(
-              //       color: Colors.black,
-              //       fontWeight: FontWeight.bold,
-              //       fontSize: 26),
-              //   textAlign: TextAlign.center,
-              // ),
               Image.asset(
                 'assets/images/babyvcare2.png',
                 width: 200,
@@ -52,12 +40,11 @@ class _BodyState extends State<Body> {
                     fontSize: 20),
                 textAlign: TextAlign.center,
               ),
-
               Spacer(flex: 3),
               DefaultButton(
                 text: "Continue",
                 press: () {
-                  Navigator.pushNamed(context, LoginScreen.routeName);
+                  Navigator.pushNamed(context, HomeScreen.routeName);
                 },
               ),
               Spacer(),

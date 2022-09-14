@@ -20,6 +20,8 @@ dependencies:
   firebase_auth: ^3.8.0
   pinput: ^2.2.12
   cloud_firestore: ^3.4.7
+  booking_calendar: ^1.1.5
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:

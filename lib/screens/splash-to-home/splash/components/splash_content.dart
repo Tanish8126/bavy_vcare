@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../utils/constants.dart';
-import '../../../utils/size_config.dart';
+import '../../../../utils/constants.dart';
+import '../../../../utils/size_config.dart';
 
 class SplashContent extends StatelessWidget {
   const SplashContent({
@@ -30,11 +30,6 @@ class SplashContent extends StatelessWidget {
           style: TextStyle(color: kPrimaryLightColor),
         ),
         Spacer(flex: 2),
-        // Image.asset(
-        //   image!,
-        //   height: getProportionateScreenHeight(265),
-        //   width: getProportionateScreenWidth(235),
-        // ),
       ],
     );
   }
