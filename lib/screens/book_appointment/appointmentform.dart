@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
 
+import '../../utils/constants.dart';
 import '../../utils/size_config.dart';
-import 'components/body.dart';
+import 'components/appointmentdata.dart';
 
-class AppointmentForm extends StatefulWidget {
+class AppointmentForm extends StatelessWidget {
   static String routeName = "/appointmentform";
-  AppointmentForm({Key? key}) : super(key: key);
+  const AppointmentForm({Key? key}) : super(key: key);
 
-  @override
-  State<AppointmentForm> createState() => _AppointmentFormState();
-}
-
-class _AppointmentFormState extends State<AppointmentForm> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    return SafeArea(child: Body());
+    return SafeArea(
+        child: Scaffold(
+      appBar: AppBar(
+        title: Text("Appointment Booking"),
+        backgroundColor: kMainColor2,
+      ),
+      body: AppForm(),
+    ));
   }
 }

@@ -1,9 +1,7 @@
-import 'package:babyv_care/screens/home/homescreen.dart';
-import 'package:babyv_care/screens/splash-to-home/login_check.dart';
-import 'package:babyv_care/utils/dafault_button2.dart';
 import 'package:flutter/material.dart';
 
-import '../../sign_in_screen.dart';
+import '../../../../utils/dafault_button2.dart';
+import '../../login_check.dart';
 
 class Body extends StatefulWidget {
   @override
@@ -39,7 +37,7 @@ class _BodyState extends State<Body> {
               DefaultButton2(
                 text: "Discover more ..",
                 press: () {
-                  Navigator.pushNamed(context, HomeScreen.routeName);
+                  Navigator.pushNamed(context, LoginCheckScreen.routeName);
                 },
               ),
               Spacer(),

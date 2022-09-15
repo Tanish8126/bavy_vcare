@@ -10,14 +10,14 @@ import 'package:babyv_care/screens/splash-to-home/sign_in_screen.dart';
 import 'package:babyv_care/screens/splash-to-home/login_check.dart';
 import 'package:babyv_care/screens/splash-to-home/splash/splash_screen.dart';
 import 'package:babyv_care/screens/uploadscreen.dart';
-import 'package:booking_calendar/booking_calendar.dart';
 import 'package:flutter/widgets.dart';
 
 // We use name route
 // All our routes will be available here
 final Map<String, WidgetBuilder> routes = {
   LoginScreen.routeName: (context) => LoginScreen(),
-  LoginCheckScreen.routeName: (context) => HomeScreen(),
+  LoginCheckScreen.routeName: (context) => LoginCheckScreen(),
+  HomeScreen.routeName: (context) => HomeScreen(),
   SplashScreen.routeName: (context) => SplashScreen(),
   SettingsScreen.routeName: (context) => SettingsScreen(),
   BookingScreen.routeName: (context) => BookingScreen(),

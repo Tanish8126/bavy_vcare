@@ -203,6 +203,8 @@ class _AppFormState extends State<AppForm> {
                               children: [
                                 TextFormField(
                                     controller: dobController,
+                                    enableInteractiveSelection: false,
+                                    focusNode: AlwaysDisabledFocusNode(),
                                     decoration: InputDecoration(
                                         fillColor: kTextColor,
                                         labelText: "Baby DOB",
@@ -213,8 +215,7 @@ class _AppFormState extends State<AppForm> {
                                         hintText: _dateTime.toString(),
                                         floatingLabelBehavior:
                                             FloatingLabelBehavior.always,
-                                        hintStyle: TextStyle(
-                                            color: kPrimaryLightColor),
+                                        hintStyle: TextStyle(color: kTextColor),
                                         labelStyle: TextStyle(
                                             color: kMainColor,
                                             fontSize: 24,
@@ -388,4 +389,9 @@ class _AppFormState extends State<AppForm> {
       ),
     );
   }
+}
+
+class AlwaysDisabledFocusNode extends FocusNode {
+  @override
+  bool get hasFocus => false;
 }

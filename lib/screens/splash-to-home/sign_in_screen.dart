@@ -57,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   keyboardType: TextInputType.number,
                   controller: _controller,
                   validator: (value) {
-                    if (value == 10) {
+                    if (value!.length > 10) {
                       return 'Please Enter Your Mobile Number';
                     }
                     return null;
