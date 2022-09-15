@@ -1,19 +1,27 @@
 import 'package:flutter/material.dart';
 
+import '../utils/constants.dart';
 import '../utils/enums.dart';
-import 'custtom_bottom_nav_bar.dart';
+import '../utils/custtom_bottom_nav_bar.dart';
 
-class Bookings extends StatefulWidget {
-  Bookings({Key? key}) : super(key: key);
+class BookingScreen extends StatefulWidget {
+  static String routeName = '/bookings';
+  BookingScreen({Key? key}) : super(key: key);
 
   @override
-  State<Bookings> createState() => _BookingsState();
+  State<BookingScreen> createState() => _BookingScreenState();
 }
 
-class _BookingsState extends State<Bookings> {
+class _BookingScreenState extends State<BookingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Upcoming Bookings",
+        ),
+        backgroundColor: kMainColor2,
+      ),
       body: Container(),
       bottomNavigationBar: CustomBottomNavBar(selectedMenu: MenuState.bookings),
     );

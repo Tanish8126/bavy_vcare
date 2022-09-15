@@ -1,3 +1,4 @@
+import 'package:babyv_care/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class UploadScreen extends StatefulWidget {
@@ -11,6 +12,13 @@ class UploadScreen extends StatefulWidget {
 class _UploadScreenState extends State<UploadScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Upload Your Documents",
+        ),
+        backgroundColor: kMainColor2,
+      ),
+    );
   }
 }

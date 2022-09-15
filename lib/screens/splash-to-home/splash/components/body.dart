@@ -1,7 +1,9 @@
 import 'package:babyv_care/screens/home/homescreen.dart';
+import 'package:babyv_care/screens/splash-to-home/login_check.dart';
+import 'package:babyv_care/utils/dafault_button2.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../utils/dafault_button.dart';
+import '../../sign_in_screen.dart';
 
 class Body extends StatefulWidget {
   @override
@@ -9,13 +11,6 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  int currentPage = 0;
-  List<Map<String, String>> splashData = [
-    {
-      "text": "Welcome to India's First Baby Vaccination app!",
-      "image": "assets/images/logo.png"
-    },
-  ];
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -41,8 +36,8 @@ class _BodyState extends State<Body> {
                 textAlign: TextAlign.center,
               ),
               Spacer(flex: 3),
-              DefaultButton(
-                text: "Continue",
+              DefaultButton2(
+                text: "Discover more ..",
                 press: () {
                   Navigator.pushNamed(context, HomeScreen.routeName);
                 },

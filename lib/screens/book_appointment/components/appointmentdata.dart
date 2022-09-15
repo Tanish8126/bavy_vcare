@@ -137,72 +137,65 @@ class _AppFormState extends State<AppForm> {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             Expanded(
-              child: Stack(
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(10),
-                    height: 700,
-                    child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Stack(
+                  children: [
+                    SingleChildScrollView(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const SizedBox(height: 30),
-                          Container(
-                            child: TextFormField(
-                              keyboardType: TextInputType.name,
-                              style: TextStyle(color: kMainColor),
-                              controller: nameController,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please Enter Your Full Name';
-                                }
-                                return null;
-                              },
-                              decoration: InputDecoration(
-                                  fillColor: kTextColor,
-                                  labelText: "Parent Name",
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(30),
-                                  ),
-                                  hintText: "Enter Your Full Name",
-                                  floatingLabelBehavior:
-                                      FloatingLabelBehavior.always,
-                                  hintStyle:
-                                      TextStyle(color: kPrimaryLightColor),
-                                  labelStyle: TextStyle(
-                                      color: kMainColor,
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold)),
-                            ),
+                          TextFormField(
+                            keyboardType: TextInputType.name,
+                            style: TextStyle(color: kMainColor),
+                            controller: nameController,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please Enter Your Full Name';
+                              }
+                              return null;
+                            },
+                            decoration: InputDecoration(
+                                fillColor: kTextColor,
+                                labelText: "Parent Name",
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                                hintText: "Enter Your Full Name",
+                                floatingLabelBehavior:
+                                    FloatingLabelBehavior.always,
+                                hintStyle: TextStyle(color: kPrimaryLightColor),
+                                labelStyle: TextStyle(
+                                    color: kMainColor,
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold)),
                           ),
                           const SizedBox(height: 30),
-                          Container(
-                            child: TextFormField(
-                              keyboardType: TextInputType.name,
-                              style: TextStyle(color: kMainColor),
-                              controller: babynameController,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please Enter Baby Name';
-                                }
-                                return null;
-                              },
-                              decoration: InputDecoration(
-                                  fillColor: kTextColor,
-                                  labelText: "Baby Name",
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(30),
-                                  ),
-                                  hintText: "Enter Baby Full Name",
-                                  floatingLabelBehavior:
-                                      FloatingLabelBehavior.always,
-                                  hintStyle:
-                                      TextStyle(color: kPrimaryLightColor),
-                                  labelStyle: TextStyle(
-                                      color: kMainColor,
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold)),
-                            ),
+                          TextFormField(
+                            keyboardType: TextInputType.name,
+                            style: TextStyle(color: kMainColor),
+                            controller: babynameController,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please Enter Baby Name';
+                              }
+                              return null;
+                            },
+                            decoration: InputDecoration(
+                                fillColor: kTextColor,
+                                labelText: "Baby Name",
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                                hintText: "Enter Baby Full Name",
+                                floatingLabelBehavior:
+                                    FloatingLabelBehavior.always,
+                                hintStyle: TextStyle(color: kPrimaryLightColor),
+                                labelStyle: TextStyle(
+                                    color: kMainColor,
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold)),
                           ),
                           const SizedBox(height: 30),
                           Center(
@@ -240,64 +233,58 @@ class _AppFormState extends State<AppForm> {
                           SizedBox(
                             height: 30,
                           ),
-                          Container(
-                            child: TextFormField(
-                              keyboardType: TextInputType.phone,
-                              style: TextStyle(color: kPrimaryLightColor),
-                              controller: mobileController,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please Enter Your Mobile Number';
-                                }
-                                return null;
-                              },
-                              decoration: InputDecoration(
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(30),
-                                  ),
-                                  fillColor: kTextColor,
-                                  labelText: "Mobile Number",
-                                  hintText: "Enter Mobile Number",
-                                  floatingLabelBehavior:
-                                      FloatingLabelBehavior.always,
-                                  hintStyle:
-                                      TextStyle(color: kPrimaryLightColor),
-                                  labelStyle: TextStyle(
-                                      color: kMainColor,
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold)),
-                            ),
+                          TextFormField(
+                            keyboardType: TextInputType.phone,
+                            style: TextStyle(color: kPrimaryLightColor),
+                            controller: mobileController,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please Enter Your Mobile Number';
+                              }
+                              return null;
+                            },
+                            decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                                fillColor: kTextColor,
+                                labelText: "Mobile Number",
+                                hintText: "Enter Mobile Number",
+                                floatingLabelBehavior:
+                                    FloatingLabelBehavior.always,
+                                hintStyle: TextStyle(color: kPrimaryLightColor),
+                                labelStyle: TextStyle(
+                                    color: kMainColor,
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold)),
                           ),
                           SizedBox(
                             height: 30,
                           ),
-                          Container(
-                            child: TextFormField(
-                              keyboardType: TextInputType.streetAddress,
-                              style: TextStyle(color: kPrimaryLightColor),
-                              controller: addressController,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please Enter Your Address';
-                                }
-                                return null;
-                              },
-                              decoration: InputDecoration(
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(30),
-                                  ),
-                                  fillColor: kTextColor,
-                                  labelText: "Address",
-                                  hintText: "Enter Your Address",
-                                  floatingLabelBehavior:
-                                      FloatingLabelBehavior.always,
-                                  hintStyle:
-                                      TextStyle(color: kPrimaryLightColor),
-                                  labelStyle: TextStyle(
-                                      color: kMainColor,
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold)),
-                            ),
+                          TextFormField(
+                            keyboardType: TextInputType.streetAddress,
+                            style: TextStyle(color: kPrimaryLightColor),
+                            controller: addressController,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please Enter Your Address';
+                              }
+                              return null;
+                            },
+                            decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                                fillColor: kTextColor,
+                                labelText: "Address",
+                                hintText: "Enter Your Address",
+                                floatingLabelBehavior:
+                                    FloatingLabelBehavior.always,
+                                hintStyle: TextStyle(color: kPrimaryLightColor),
+                                labelStyle: TextStyle(
+                                    color: kMainColor,
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold)),
                           ),
                           const SizedBox(height: 20),
                           FormHelper.dropDownWidgetWithLabel(
@@ -392,8 +379,8 @@ class _AppFormState extends State<AppForm> {
                         ],
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],

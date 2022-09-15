@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "807712417415-ufojmktnkp9nmfp6su7jmkbks5achvfr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.newapp.babyv_care",
+            "certificate_hash": "2070ff2a0658806124876e0039f00252c350fb3f"
+          }
+        },
+        {
           "client_id": "807712417415-q62g61cra75ti8c12ds5kh6e1o9h78i5.apps.googleusercontent.com",
           "client_type": 3
         }

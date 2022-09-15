@@ -50,7 +50,7 @@ class _BodyState extends State<Body> {
                     fontSize: 24),
                 textAlign: TextAlign.center,
               ),
-              Expanded(child: MainScreen())
+              Expanded(child: MainScreenForm())
             ])));
   }
 }

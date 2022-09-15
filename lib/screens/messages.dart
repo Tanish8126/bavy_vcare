@@ -1,20 +1,32 @@
 import 'package:flutter/material.dart';
 
+import '../utils/constants.dart';
 import '../utils/enums.dart';
-import 'custtom_bottom_nav_bar.dart';
+import '../utils/custtom_bottom_nav_bar.dart';
 
-class messages extends StatefulWidget {
-  messages({Key? key}) : super(key: key);
+class MessageScreen extends StatefulWidget {
+  static String routeName = '/messageing';
+  MessageScreen({Key? key}) : super(key: key);
 
   @override
-  State<messages> createState() => _messagesState();
+  State<MessageScreen> createState() => _MessageScreenState();
 }
 
-class _messagesState extends State<messages> {
+class _MessageScreenState extends State<MessageScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(),
+      appBar: AppBar(
+        title: Text(
+          "Chat with Doctors",
+        ),
+        backgroundColor: kMainColor2,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Text("Coming Soon",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+      ),
       bottomNavigationBar: CustomBottomNavBar(selectedMenu: MenuState.message),
     );
   }

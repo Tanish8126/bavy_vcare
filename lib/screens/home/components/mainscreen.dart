@@ -6,15 +6,15 @@ import '../../../utils/size_config.dart';
 import '../../book_appointment/appointmentform.dart';
 import '../../uploadscreen.dart';
 
-class MainScreen extends StatefulWidget {
-  static String routeName = "/mainscreen";
-  MainScreen({Key? key}) : super(key: key);
+class MainScreenForm extends StatefulWidget {
+  static String routeName = "/mainscreenform";
+  MainScreenForm({Key? key}) : super(key: key);
 
   @override
-  State<MainScreen> createState() => _MainScreenState();
+  State<MainScreenForm> createState() => _MainScreenFormState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _MainScreenFormState extends State<MainScreenForm> {
   List<dynamic> age = [];
   List<dynamic> vaccineMasters = [];
   List<dynamic> vaccines = [];

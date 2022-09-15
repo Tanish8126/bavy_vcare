@@ -1,4 +1,4 @@
-import 'package:babyv_care/screens/home/components/mainscreen.dart';
+import 'package:babyv_care/screens/home/homescreen.dart';
 import 'package:babyv_care/utils/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -65,7 +65,7 @@ class _OtpScreenState extends State<OtpScreen> {
                     if (value.user != null) {
                       Navigator.pushAndRemoveUntil(
                           context,
-                          MaterialPageRoute(builder: (context) => MainScreen()),
+                          MaterialPageRoute(builder: (context) => HomeScreen()),
                           (route) => false);
                     }
                   });
@@ -91,7 +91,7 @@ class _OtpScreenState extends State<OtpScreen> {
             if (value.user != null) {
               Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => MainScreen()),
+                  MaterialPageRoute(builder: (context) => HomeScreen()),
                   (route) => false);
             }
           });
