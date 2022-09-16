@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
 
 import '../../../utils/constants.dart';
@@ -66,8 +67,6 @@ class _AppFormState extends State<AppForm> {
         .add({"id": 3, "name": "Dr. Rakesh(170/1-5th Main Bangalore-560064)"});
   }
 
-  DateTime _dateTime = DateTime.now();
-
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
@@ -96,7 +95,7 @@ class _AppFormState extends State<AppForm> {
   void _showDatePicker() {
     showDatePicker(
             context: context,
-            initialDate: DateTime.now(),
+            initialDate: _dateTime == null ? DateTime.now() : _dateTime,
             firstDate: DateTime(2008),
             lastDate: DateTime(2023))
         .then((value) {
@@ -105,6 +104,9 @@ class _AppFormState extends State<AppForm> {
       });
     });
   }
+
+  DateTime _dateTime = DateTime(2022, 12, 01);
+  // final String dateFormat = DateFormat('dd-MM-yyyy');
 
   CollectionReference submittedform =
       FirebaseFirestore.instance.collection('forms');
@@ -212,10 +214,12 @@ class _AppFormState extends State<AppForm> {
                                           borderRadius:
                                               BorderRadius.circular(30),
                                         ),
-                                        hintText: _dateTime.toString(),
+                                        hintText:
+                                            "${_dateTime.day}/${_dateTime.month}/${_dateTime.year}",
                                         floatingLabelBehavior:
                                             FloatingLabelBehavior.always,
-                                        hintStyle: TextStyle(color: kTextColor),
+                                        hintStyle:
+                                            TextStyle(color: Colors.black),
                                         labelStyle: TextStyle(
                                             color: kMainColor,
                                             fontSize: 24,
@@ -289,21 +293,24 @@ class _AppFormState extends State<AppForm> {
                           ),
                           const SizedBox(height: 20),
                           FormHelper.dropDownWidgetWithLabel(
-                              context,
-                              "Gender",
-                              "Select Gender",
-                              this.genderId,
-                              this.genders, (onChangedVal) {
-                            this.genderId = onChangedVal;
-                          }, (onValidateVal) {
-                            if (onValidateVal == null) {
-                              return "Please Select Gender";
-                            }
-                            return null;
-                          },
-                              borderColor: Colors.black,
-                              borderFocusColor: Colors.black,
-                              borderRadius: 15),
+                            context,
+                            "Gender",
+                            "Select Gender",
+                            this.genderId,
+                            this.genders,
+                            (onChangedVal) {
+                              this.genderId = onChangedVal;
+                            },
+                            (onValidateVal) {
+                              if (onValidateVal == null) {
+                                return "Please Select Gender";
+                              }
+                              return null;
+                            },
+                            borderColor: Colors.black,
+                            borderFocusColor: Colors.black,
+                            borderRadius: 15,
+                          ),
                           const SizedBox(height: 10),
                           FormHelper.dropDownWidgetWithLabel(
                               context,

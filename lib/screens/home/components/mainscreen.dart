@@ -79,8 +79,6 @@ class _MainScreenFormState extends State<MainScreenForm> {
       {"Id": 1, "name": "Tdap/Td", "ParentId": 13},
       {"Id": 2, "name": "HPV", "ParentId": 13},
     ];
-    this.vaccineId = null;
-    setState(() {});
   }
 
   @override
@@ -109,6 +107,7 @@ class _MainScreenFormState extends State<MainScreenForm> {
                           onChangedVal.toString())
                       .toList();
                   this.vaccineId = null;
+                  setState(() {});
                 }, (onValidateVal) {
                   if (onValidateVal == null) {
                     return "Please Select Age";
