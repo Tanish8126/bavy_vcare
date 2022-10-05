@@ -24,7 +24,7 @@ class CustomBottomNavBar extends StatelessWidget {
       alignment: Alignment.center,
       height: 60,
       decoration: BoxDecoration(
-        color: kMainColor2,
+        color: kbg,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -53,7 +53,7 @@ class CustomBottomNavBar extends StatelessWidget {
               }),
           IconButton(
               padding: EdgeInsets.zero,
-              icon: SvgPicture.asset("assets/icons/Cart Icon.svg",
+              icon: SvgPicture.asset("assets/icons/receipt.svg",
                   color: MenuState.bookings == selectedMenu
                       ? kPrimaryColor
                       : inActiveIconColor),

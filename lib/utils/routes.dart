@@ -23,8 +23,8 @@ final Map<String, WidgetBuilder> routes = {
   BookingScreen.routeName: (context) => BookingScreen(),
   MessageScreen.routeName: (context) => MessageScreen(),
   MainScreenForm.routeName: (context) => MainScreenForm(),
-  AppointmentForm.routeName: (context) => AppointmentForm(),
+  // AppointmentForm.routeName: (context) => AppointmentForm(),
   NotificationScreen.routeName: (context) => NotificationScreen(),
   UploadScreen.routeName: (context) => UploadScreen(),
-  BookingCalendarDemoApp.routeName: (context) => BookingCalendarDemoApp(),
+  // BookingCalendarDemoApp.routeName: (context) => BookingCalendarDemoApp(),
 };

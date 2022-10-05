@@ -20,11 +20,11 @@ dependencies:
   firebase_auth: ^3.8.0
   pinput: ^2.2.12
   cloud_firestore: ^3.4.7
-  booking_calendar: ^1.1.5
+  booking_calendar: ^1.1.6
   intl: ^0.17.0
   firebase_messaging: ^13.0.1 
   flutter_local_notifications: ^9.9.1
-  dropdown_button2: ^1.8.1
+  json_annotation: ^4.7.0
 
 dev_dependencies:
   flutter_test:

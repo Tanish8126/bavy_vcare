@@ -13,13 +13,9 @@ class DiscountBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
+      height: 50,
       width: double.infinity,
-      margin: EdgeInsets.all(getProportionateScreenWidth(20)),
-      padding: EdgeInsets.symmetric(
-        horizontal: getProportionateScreenWidth(30),
-        vertical: getProportionateScreenWidth(10),
-      ),
+      margin: EdgeInsets.all(getProportionateScreenWidth(10)),
       decoration: BoxDecoration(
         color: kMainColor2,
         borderRadius: BorderRadius.circular(10),
@@ -34,14 +30,14 @@ class DiscountBanner extends StatelessWidget {
               TextSpan(
                 text: "Welcome to Baby V Care\n",
                 style: TextStyle(
-                  fontSize: getProportionateScreenWidth(24),
-                  fontWeight: FontWeight.bold,
+                  fontSize: getProportionateScreenWidth(18),
+                  fontWeight: FontWeight.normal,
                 ),
               ),
               TextSpan(
                 text: "Get Vaccinated Now",
                 style: TextStyle(
-                  fontSize: getProportionateScreenWidth(30),
+                  fontSize: getProportionateScreenWidth(22),
                   fontWeight: FontWeight.bold,
                 ),
               ),

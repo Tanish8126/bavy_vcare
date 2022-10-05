@@ -20,7 +20,6 @@ class _BookingScreenState extends State<BookingScreen> {
         title: Text(
           "Upcoming Bookings",
         ),
-        backgroundColor: kMainColor2,
       ),
       body: Container(),
       bottomNavigationBar: CustomBottomNavBar(selectedMenu: MenuState.bookings),

@@ -1,3 +1,4 @@
+import 'package:babyv_care/screens/home/components/appointmentbanner.dart';
 import 'package:babyv_care/screens/home/components/mainscreen.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +23,6 @@ class _BodyState extends State<Body> {
             title: Text(
               "Baby V Care",
             ),
-            backgroundColor: kMainColor2,
             actions: <Widget>[
               Padding(
                 padding: const EdgeInsets.all(10),
@@ -38,19 +38,16 @@ class _BodyState extends State<Body> {
                 ),
               ),
             ]),
-        body: Padding(
-            padding: const EdgeInsets.only(top: 10),
-            child: Column(children: [
-              DiscountBanner(),
-              Text(
-                "Select The Required Vaccine",
-                style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24),
-                textAlign: TextAlign.center,
-              ),
-              Expanded(child: MainScreenForm())
-            ])));
+        body: Column(children: [
+          DiscountBanner(),
+          AppointmentBanner(),
+          Text(
+            "Select The Required Vaccine",
+            style: TextStyle(
+                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 24),
+            textAlign: TextAlign.center,
+          ),
+          Expanded(child: MainScreenForm())
+        ]));
   }
 }

@@ -1,5 +1,4 @@
 import 'package:babyv_care/screens/home/homescreen.dart';
-import 'package:babyv_care/utils/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
@@ -35,7 +34,6 @@ class _OtpScreenState extends State<OtpScreen> {
       key: _scaffoldkey,
       appBar: AppBar(
         title: Text('OTP Verification'),
-        backgroundColor: kMainColor2,
       ),
       body: Column(
         children: [

@@ -17,7 +17,6 @@ class _UploadScreenState extends State<UploadScreen> {
         title: Text(
           "Upload Your Documents",
         ),
-        backgroundColor: kMainColor2,
       ),
     );
   }

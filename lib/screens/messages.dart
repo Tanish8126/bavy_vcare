@@ -20,7 +20,6 @@ class _MessageScreenState extends State<MessageScreen> {
         title: Text(
           "Chat with Doctors",
         ),
-        backgroundColor: kMainColor2,
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),

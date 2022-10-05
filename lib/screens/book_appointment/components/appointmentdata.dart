@@ -1,11 +1,15 @@
+import 'package:babyv_care/utils/text_form_field.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
 
 import '../../../utils/constants.dart';
+import '../../../utils/dafault_button.dart';
 import '../../../utils/dafault_button2.dart';
 import '../../booking_calender.dart';
+
+List<String> genders = <String>['Male', 'Female'];
+List<String> relations = <String>['Father', 'Mother', 'Gaurdian'];
 
 class AppForm extends StatefulWidget {
   AppForm({Key? key}) : super(key: key);
@@ -16,6 +20,9 @@ class AppForm extends StatefulWidget {
 
 class _AppFormState extends State<AppForm> {
   final _formKey = GlobalKey<FormState>();
+
+  String dropdownValue1 = genders.first;
+  String dropdownValue2 = relations.first;
 
   var name = "";
   var babyname = "";
@@ -35,36 +42,10 @@ class _AppFormState extends State<AppForm> {
   final relationController = TextEditingController();
   final doctorController = TextEditingController();
 
-  List<dynamic> genders = [];
-  List<dynamic> doctors = [];
-  List<dynamic> relations = [];
-
-  String? genderId;
-  String? relationId;
-  String? doctorId;
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-
-    this.genders.add({"id": 1, "name": "Male"});
-    this.genders.add({"id": 2, "name": "Female"});
-    this.relations.add({"id": 1, "name": "Father"});
-    this.relations.add({"id": 2, "name": "Mother"});
-    this.relations.add({"id": 3, "name": "Gaurdian"});
-    this
-        .doctors
-        .add({"id": 1, "name": "Dr. Rahul(170/1-5th Main Bangalore-560064)"});
-    this
-        .doctors
-        .add({"id": 2, "name": "Dr. Batra(170/1-5th Main Bangalore-560064)"});
-    this
-        .doctors
-        .add({"id": 3, "name": "Dr. Priya(170/1-5th Main Bangalore-560064)"});
-    this
-        .doctors
-        .add({"id": 3, "name": "Dr. Rakesh(170/1-5th Main Bangalore-560064)"});
   }
 
   @override
@@ -119,7 +100,7 @@ class _AppFormState extends State<AppForm> {
           'mobile': mobile,
           'address': address,
           'gender': gender,
-          'relation': relations,
+          'relation': relation,
           'doctor': doctor,
         })
         .then((value) => print('User Added'))
@@ -148,65 +129,41 @@ class _AppFormState extends State<AppForm> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const SizedBox(height: 30),
-                          TextFormField(
-                            keyboardType: TextInputType.name,
-                            style: TextStyle(color: kMainColor),
+                          DefaultField(
                             controller: nameController,
-                            validator: (value) {
+                            keyboardtype: TextInputType.name,
+                            maxlength: null,
+                            validate: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'Please Enter Your Full Name';
                               }
                               return null;
                             },
-                            decoration: InputDecoration(
-                                fillColor: kTextColor,
-                                labelText: "Parent Name",
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                hintText: "Enter Your Full Name",
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.always,
-                                hintStyle: TextStyle(color: kPrimaryLightColor),
-                                labelStyle: TextStyle(
-                                    color: kMainColor,
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.bold)),
+                            labeltext: "Parent Name",
+                            hinttext: "Enter Your Full Name",
                           ),
                           const SizedBox(height: 30),
-                          TextFormField(
-                            keyboardType: TextInputType.name,
-                            style: TextStyle(color: kMainColor),
+                          DefaultField(
                             controller: babynameController,
-                            validator: (value) {
+                            keyboardtype: TextInputType.name,
+                            maxlength: null,
+                            validate: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'Please Enter Baby Name';
                               }
                               return null;
                             },
-                            decoration: InputDecoration(
-                                fillColor: kTextColor,
-                                labelText: "Baby Name",
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                hintText: "Enter Baby Full Name",
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.always,
-                                hintStyle: TextStyle(color: kPrimaryLightColor),
-                                labelStyle: TextStyle(
-                                    color: kMainColor,
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.bold)),
+                            hinttext: "Enter Baby Full Name",
+                            labeltext: "Baby Name",
                           ),
                           const SizedBox(height: 30),
                           Center(
                             child: Column(
                               children: [
-                                TextFormField(
+                                TextField(
                                     controller: dobController,
                                     enableInteractiveSelection: false,
-                                    focusNode: AlwaysDisabledFocusNode(),
+                                    readOnly: true,
                                     decoration: InputDecoration(
                                         fillColor: kTextColor,
                                         labelText: "Baby DOB",
@@ -238,30 +195,18 @@ class _AppFormState extends State<AppForm> {
                           SizedBox(
                             height: 30,
                           ),
-                          TextFormField(
-                            keyboardType: TextInputType.phone,
-                            style: TextStyle(color: kPrimaryLightColor),
+                          DefaultField(
                             controller: mobileController,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please Enter Your Mobile Number';
+                            keyboardtype: TextInputType.phone,
+                            maxlength: 10,
+                            validate: (value) {
+                              if (value!.isEmpty || value.length < 10) {
+                                return 'Please Enter 10 Digit Mobile Number';
                               }
                               return null;
                             },
-                            decoration: InputDecoration(
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                fillColor: kTextColor,
-                                labelText: "Mobile Number",
-                                hintText: "Enter Mobile Number",
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.always,
-                                hintStyle: TextStyle(color: kPrimaryLightColor),
-                                labelStyle: TextStyle(
-                                    color: kMainColor,
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.bold)),
+                            hinttext: "Enter Mobile Number",
+                            labeltext: "Mobile Number",
                           ),
                           SizedBox(
                             height: 30,
@@ -292,42 +237,82 @@ class _AppFormState extends State<AppForm> {
                                     fontWeight: FontWeight.bold)),
                           ),
                           const SizedBox(height: 20),
-                          FormHelper.dropDownWidgetWithLabel(
-                            context,
-                            "Gender",
-                            "Select Gender",
-                            this.genderId,
-                            this.genders,
-                            (onChangedVal) {
-                              this.genderId = onChangedVal;
-                            },
-                            (onValidateVal) {
-                              if (onValidateVal == null) {
-                                return "Please Select Gender";
-                              }
-                              return null;
-                            },
-                            borderColor: Colors.black,
-                            borderFocusColor: Colors.black,
-                            borderRadius: 15,
+                          Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                children: [
+                                  DropdownButtonFormField(
+                                    items: genders
+                                        .map<DropdownMenuItem<String>>(
+                                            (String value) {
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Text(value),
+                                      );
+                                    }).toList(),
+                                    value: dropdownValue1,
+                                    icon: const Icon(Icons.arrow_downward),
+                                    isExpanded: true,
+                                    decoration: InputDecoration(
+                                        focusedBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(color: kbg)),
+                                        icon: const Icon(Icons
+                                            .arrow_drop_down_circle_outlined),
+                                        labelStyle: TextStyle(
+                                            color: kMainColor,
+                                            fontSize: 24,
+                                            fontWeight: FontWeight.bold),
+                                        label: Text("Select Gender")),
+                                    borderRadius: BorderRadius.circular(10),
+                                    elevation: 50,
+                                    hint: Text(" Select gender"),
+                                    iconEnabledColor: Colors.blue,
+                                    style: const TextStyle(color: Colors.black),
+                                    onChanged: (String? value) {
+                                      setState(() {
+                                        dropdownValue1 = value!;
+                                      });
+                                    },
+                                  ),
+                                  SizedBox(
+                                    height: 40,
+                                  ),
+                                  DropdownButtonFormField(
+                                    items: relations
+                                        .map<DropdownMenuItem<String>>(
+                                            (String value) {
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Text(value),
+                                      );
+                                    }).toList(),
+                                    value: dropdownValue2,
+                                    isExpanded: true,
+                                    decoration: const InputDecoration(
+                                      prefixIcon: Icon(Icons.man),
+                                      labelStyle: TextStyle(
+                                          color: kMainColor,
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.bold),
+                                      label: Text("Relationship with child"),
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                    elevation: 50,
+                                    hint: Text(" Select gender"),
+                                    iconEnabledColor: Colors.blue,
+                                    style: const TextStyle(color: Colors.black),
+                                    onChanged: (String? value) {
+                                      setState(() {
+                                        dropdownValue2 = value!;
+                                      });
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                           const SizedBox(height: 10),
-                          FormHelper.dropDownWidgetWithLabel(
-                              context,
-                              "I'm the Childs",
-                              "Relationship with Child",
-                              this.relationId,
-                              this.relations, (onChangedVal) {
-                            this.relationId = onChangedVal;
-                          }, (onValidateVal) {
-                            if (onValidateVal == null) {
-                              return "Please Select Relation";
-                            }
-                            return null;
-                          },
-                              borderColor: Colors.black,
-                              borderFocusColor: Colors.black,
-                              borderRadius: 15),
                           const SizedBox(height: 30),
                           Container(
                             decoration: BoxDecoration(
@@ -342,46 +327,62 @@ class _AppFormState extends State<AppForm> {
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold),
                                 ),
-                                FormHelper.dropDownWidgetWithLabel(
-                                    context,
-                                    "Doctor",
-                                    "Select Doctor near You",
-                                    this.doctorId,
-                                    this.doctors, (onChangedVal) {
-                                  this.doctorId = onChangedVal;
-                                }, (onValidateVal) {
-                                  if (onValidateVal == null) {
-                                    return "Please Select Doctor";
-                                  }
-                                  return null;
-                                },
-                                    borderColor: Colors.black,
-                                    borderFocusColor: Colors.black,
-                                    borderRadius: 15),
                                 const SizedBox(height: 20),
-                                DefaultButton2(
-                                  text: "Choose Your Slot",
-                                  press: () {
-                                    if (_formKey.currentState!.validate()) {
-                                      setState(() {
-                                        name = nameController.text;
-                                        babyname = babynameController.text;
-                                        mobile = mobileController.text;
-                                        address = addressController.text;
-                                        gender = genderController.text;
-                                        relation = relationController.text;
-                                        doctor = doctorController.text;
-
-                                        addUser();
-                                        clearText();
-                                      });
-                                    }
-                                    Navigator.pushNamed(context,
-                                        BookingCalendarDemoApp.routeName);
+                                DropdownButtonFormField(
+                                  items: relations
+                                      .map<DropdownMenuItem<String>>(
+                                          (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  }).toList(),
+                                  value: dropdownValue2,
+                                  isExpanded: true,
+                                  decoration: const InputDecoration(
+                                    prefixIcon: Icon(Icons.medication_outlined),
+                                    labelStyle: TextStyle(
+                                        color: kMainColor,
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.bold),
+                                    label: Text("Selact Doctor"),
+                                  ),
+                                  borderRadius: BorderRadius.circular(10),
+                                  elevation: 50,
+                                  hint: Text(" Select gender"),
+                                  iconEnabledColor: Colors.blue,
+                                  style: const TextStyle(color: Colors.black),
+                                  onChanged: (String? value) {
+                                    setState(() {
+                                      dropdownValue2 = value!;
+                                    });
                                   },
                                 ),
+                                const SizedBox(height: 20),
+                                DefaultButton2(
+                                    text: "Choose Your Slot", press: () {}),
                               ],
                             ),
+                          ),
+                          const SizedBox(height: 20),
+                          DefaultButton(
+                            text: "Confirm Booking",
+                            press: () {
+                              if (_formKey.currentState!.validate()) {
+                                setState(() {
+                                  name = nameController.text;
+                                  babyname = babynameController.text;
+                                  mobile = mobileController.text;
+                                  address = addressController.text;
+                                  gender = genderController.text;
+                                  relation = relationController.text;
+                                  doctor = doctorController.text;
+
+                                  addUser();
+                                  clearText();
+                                });
+                              }
+                            },
                           ),
                           const SizedBox(height: 20),
                         ],
@@ -396,9 +397,4 @@ class _AppFormState extends State<AppForm> {
       ),
     );
   }
-}
-
-class AlwaysDisabledFocusNode extends FocusNode {
-  @override
-  bool get hasFocus => false;
 }

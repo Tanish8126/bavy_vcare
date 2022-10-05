@@ -21,6 +21,7 @@ class _MainScreenFormState extends State<MainScreenForm> {
 
   String? ageId;
   String? vaccineId;
+  String? vaccine;
 
   @override
   void initState() {
@@ -41,7 +42,7 @@ class _MainScreenFormState extends State<MainScreenForm> {
     this.age.add({"id": 12, "name": "4-6 Years"});
     this.age.add({"id": 13, "name": "9-12 Years"});
 
-    this.vaccineMasters = [
+    vaccineMasters = [
       {"Id": 1, "name": "BCG", "ParentId": 1},
       {"Id": 2, "name": "OPV 0", "ParentId": 1},
       {"Id": 3, "name": "Hep-B1", "ParentId": 1},
@@ -95,18 +96,16 @@ class _MainScreenFormState extends State<MainScreenForm> {
               children: [
                 const SizedBox(height: 30),
                 FormHelper.dropDownWidgetWithLabel(
-                    context, "Age", "Select Baby Age", this.ageId, this.age,
+                    context, "Age", "Select Baby Age", ageId, age,
                     (onChangedVal) {
-                  this.ageId = onChangedVal;
+                  ageId = onChangedVal;
                   print("$onChangedVal");
-
-                  this.vaccines = this
-                      .vaccineMasters
+                  vaccines = vaccineMasters
                       .where((vaccineItem) =>
                           vaccineItem["ParentId"].toString() ==
                           onChangedVal.toString())
                       .toList();
-                  this.vaccineId = null;
+                  vaccineId = null;
                   setState(() {});
                 }, (onValidateVal) {
                   if (onValidateVal == null) {
@@ -124,7 +123,7 @@ class _MainScreenFormState extends State<MainScreenForm> {
                     "Select The Vaccine",
                     this.vaccineId,
                     this.vaccines, (onChangedVal) {
-                  this.vaccineId = onChangedVal;
+                  vaccine = onChangedVal;
                 }, (onValidateVal) {
                   if (onValidateVal == null) {
                     return "Please Select Relation";
@@ -140,7 +139,8 @@ class _MainScreenFormState extends State<MainScreenForm> {
                 DefaultButton(
                   text: "Book an Appointment",
                   press: () {
-                    Navigator.pushNamed(context, AppointmentForm.routeName);
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => AppointmentForm()));
                   },
                 ),
                 SizedBox(

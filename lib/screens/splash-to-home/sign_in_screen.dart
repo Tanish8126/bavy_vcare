@@ -19,7 +19,6 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Login'),
-        backgroundColor: kMainColor2,
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -43,7 +42,12 @@ class _LoginScreenState extends State<LoginScreen> {
               Container(
                 margin: EdgeInsets.only(top: 40, right: 10, left: 10),
                 child: TextFormField(
+                  onTap: () {
+                    FocusScope.of(context).unfocus();
+                  },
                   decoration: InputDecoration(
+                    focusedBorder:
+                        OutlineInputBorder(borderSide: BorderSide(color: kbg)),
                     labelText: "Mobile Number",
                     labelStyle: TextStyle(fontSize: 20, color: Colors.black),
                     hintText: "Enter your Mobile Number",
