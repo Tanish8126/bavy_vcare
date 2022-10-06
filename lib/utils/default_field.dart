@@ -11,6 +11,8 @@ class DefaultField extends StatelessWidget {
       this.hinttext,
       this.validate,
       this.maxlength,
+      this.prefix,
+      this.prefixicon,
       this.keyboardtype})
       : super(key: key);
 
@@ -20,6 +22,8 @@ class DefaultField extends StatelessWidget {
   final keyboardtype;
   final validate;
   final maxlength;
+  final prefix;
+  final prefixicon;
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +40,8 @@ class DefaultField extends StatelessWidget {
           ),
           fillColor: kTextColor,
           labelText: labeltext,
+          prefix: prefix,
+          prefixIcon: prefixicon,
           hintText: hinttext,
           floatingLabelBehavior: FloatingLabelBehavior.always,
           hintStyle: TextStyle(color: kPrimaryLightColor),

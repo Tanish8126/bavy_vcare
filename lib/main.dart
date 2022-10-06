@@ -30,18 +30,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
-//   String? vaccine;
-//  vaccine = onChangedVal;
-//  vaccine!
-
-
-// final String vaccine;
-//   AppointmentForm(
-//     this.vaccine,
-//   );
-
-// Navigator.of(context).push(MaterialPageRoute(
-//                         builder: (context) =>
-//                             AppointmentForm(this.vaccinename)));
