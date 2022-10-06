@@ -15,7 +15,7 @@ class SplashContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Spacer(),
+        const Spacer(),
         Text(
           "Baby V Care",
           style: TextStyle(
@@ -27,9 +27,9 @@ class SplashContent extends StatelessWidget {
         Text(
           text!,
           textAlign: TextAlign.center,
-          style: TextStyle(color: kPrimaryLightColor),
+          style: const TextStyle(color: kPrimaryLightColor),
         ),
-        Spacer(flex: 2),
+        const Spacer(flex: 2),
       ],
     );
   }

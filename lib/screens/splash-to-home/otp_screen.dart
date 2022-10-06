@@ -3,10 +3,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 
+import '../../utils/constants.dart';
+
 class OtpScreen extends StatefulWidget {
   static String routeName = "/otp";
   final String phone;
-  OtpScreen(this.phone);
+  const OtpScreen(this.phone, {Key? key}) : super(key: key);
   @override
   _OtpScreenState createState() => _OtpScreenState();
 }
@@ -19,7 +21,7 @@ class _OtpScreenState extends State<OtpScreen> {
   final defaultPinTheme = PinTheme(
     width: 56,
     height: 56,
-    textStyle: TextStyle(
+    textStyle: const TextStyle(
         fontSize: 20,
         color: Color.fromRGBO(30, 60, 87, 1),
         fontWeight: FontWeight.w600),
@@ -31,52 +33,72 @@ class _OtpScreenState extends State<OtpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldkey,
-      appBar: AppBar(
-        title: Text('OTP Verification'),
-      ),
-      body: Column(
-        children: [
-          Container(
-            margin: EdgeInsets.only(top: 40),
-            child: Center(
-              child: Text(
-                'We have sent your code on\n +91-${widget.phone}',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(30.0),
-            child: Pinput(
-              length: 6,
-              defaultPinTheme: defaultPinTheme,
-              controller: _pinPutController,
-              pinAnimationType: PinAnimationType.fade,
-              onSubmitted: (pin) async {
-                try {
-                  await FirebaseAuth.instance
-                      .signInWithCredential(PhoneAuthProvider.credential(
-                          verificationId: _verificationCode!, smsCode: pin))
-                      .then((value) async {
-                    if (value.user != null) {
-                      Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(builder: (context) => HomeScreen()),
-                          (route) => false);
-                    }
-                  });
-                } catch (e) {
-                  ScaffoldMessenger.of(context)
-                      .showSnackBar(SnackBar(content: Text(e.toString())));
-                }
-              },
-            ),
-          )
-        ],
-      ),
-    );
+        key: _scaffoldkey,
+        appBar: AppBar(
+            title: const Text('OTP Verification'),
+            flexibleSpace: Container(
+              decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                      colors: [kbg, Color(0xff82c3df)],
+                      begin: FractionalOffset(0, 0),
+                      end: FractionalOffset(1.0, 0),
+                      tileMode: TileMode.clamp)),
+            )),
+        body: Column(
+          children: [
+            Material(
+                borderRadius:
+                    const BorderRadius.only(bottomLeft: Radius.circular(100)),
+                color: const Color.fromARGB(255, 134, 190, 239),
+                child: SizedBox(
+                  height: 300,
+                  width: double.infinity,
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.only(left: 15, right: 15, bottom: 80),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          'We have sent your code on\n +91-${widget.phone}',
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 18),
+                          textAlign: TextAlign.center,
+                        ),
+                        Pinput(
+                          length: 6,
+                          defaultPinTheme: defaultPinTheme,
+                          controller: _pinPutController,
+                          pinAnimationType: PinAnimationType.fade,
+                          onSubmitted: (pin) async {
+                            try {
+                              await FirebaseAuth.instance
+                                  .signInWithCredential(
+                                      PhoneAuthProvider.credential(
+                                          verificationId: _verificationCode!,
+                                          smsCode: pin))
+                                  .then((value) async {
+                                if (value.user != null) {
+                                  Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const HomeScreen()),
+                                      (route) => false);
+                                }
+                              });
+                            } catch (e) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text(e.toString())));
+                            }
+                          },
+                        )
+                      ],
+                    ),
+                  ),
+                ))
+          ],
+        ));
   }
 
   _verifyPhone() async {
@@ -89,7 +111,7 @@ class _OtpScreenState extends State<OtpScreen> {
             if (value.user != null) {
               Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => HomeScreen()),
+                  MaterialPageRoute(builder: (context) => const HomeScreen()),
                   (route) => false);
             }
           });
@@ -107,12 +129,11 @@ class _OtpScreenState extends State<OtpScreen> {
             _verificationCode = verificationID;
           });
         },
-        timeout: Duration(seconds: 120));
+        timeout: const Duration(seconds: 120));
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _verifyPhone();
   }

@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 
-import '../../../../../utils/constants.dart';
 import '../../../../../utils/size_config.dart';
+import '../../../utils/constants.dart';
 
 class AppointmentBanner extends StatelessWidget {
   const AppointmentBanner({
@@ -23,7 +23,7 @@ class AppointmentBanner extends StatelessWidget {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           gradient: const LinearGradient(
-              colors: [Color(0xff7a60a5), Color(0xff82c3df)],
+              colors: [kbg, Color(0xff82c3df)],
               begin: FractionalOffset(0, 0),
               end: FractionalOffset(1.0, 0),
               tileMode: TileMode.clamp)),

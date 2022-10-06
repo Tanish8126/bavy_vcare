@@ -23,8 +23,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           primarySwatch: Colors.blue,
           backgroundColor: Colors.white,
-          appBarTheme:
-              const AppBarTheme(color: kbg, elevation: 0, centerTitle: true)),
+          appBarTheme: const AppBarTheme(
+            color: kbg,
+            elevation: 0,
+            centerTitle: true,
+          )),
       initialRoute: SplashScreen.routeName,
       routes: routes,
     );

@@ -1,7 +1,8 @@
+// ignore_for_file: prefer_typing_uninitialized_variables, unnecessary_const
+
 import 'package:flutter/material.dart';
 
 import 'constants.dart';
-import 'size_config.dart';
 
 class DefaultField extends StatelessWidget {
   const DefaultField(
@@ -29,12 +30,13 @@ class DefaultField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       keyboardType: keyboardtype,
-      style: TextStyle(color: kPrimaryLightColor),
+      style: const TextStyle(color: kMainColor),
       controller: controller,
       maxLength: maxlength,
       validator: validate,
       decoration: InputDecoration(
-          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: kbg)),
+          focusedBorder: const OutlineInputBorder(
+              borderSide: const BorderSide(color: kbg)),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30),
           ),
@@ -44,8 +46,8 @@ class DefaultField extends StatelessWidget {
           prefixIcon: prefixicon,
           hintText: hinttext,
           floatingLabelBehavior: FloatingLabelBehavior.always,
-          hintStyle: TextStyle(color: kPrimaryLightColor),
-          labelStyle: TextStyle(
+          hintStyle: const TextStyle(color: kPrimaryLightColor),
+          labelStyle: const TextStyle(
               color: kMainColor, fontSize: 24, fontWeight: FontWeight.bold)),
     );
   }

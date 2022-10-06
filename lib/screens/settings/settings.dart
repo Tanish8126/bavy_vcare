@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_new, unnecessary_const
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -16,53 +18,53 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  final Mobile = FirebaseAuth.instance.currentUser!.phoneNumber;
+  final mobile = FirebaseAuth.instance.currentUser!.phoneNumber;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Settings"),
+        title: const Text("Settings"),
       ),
       body: Container(
-        padding: EdgeInsets.only(left: 16, top: 25, right: 16),
+        padding: const EdgeInsets.only(left: 16, top: 25, right: 16),
         child: ListView(
           shrinkWrap: true,
           children: [
             Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.person,
                   color: kPrimaryColor,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 8,
                 ),
-                Text(
+                const Text(
                   "Account",
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: kPrimaryLightColor),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 15,
                 ),
                 Text(
-                  "$Mobile",
-                  style: TextStyle(
+                  "$mobile",
+                  style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: kPrimaryLightColor),
                 )
               ],
             ),
-            Divider(
+            const Divider(
               height: 15,
               thickness: 2,
               color: kMainColor,
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             buildAccountOptionRow(context, "Social", "nav"),
@@ -70,13 +72,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
             buildAccountOptionRow(context, "Privacy and security", "nav"),
             buildAccountOptionRow(context, "Share App", "nav"),
             buildAccountOptionRow(context, "Feedback & Review", "nav"),
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
             Center(
               child: DefaultButton(
                 press: () async {
                   await FirebaseAuth.instance.signOut();
+
                   Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(builder: (context) => LoginScreen()),
@@ -88,7 +91,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: CustomBottomNavBar(selectedMenu: MenuState.profile),
+      bottomNavigationBar:
+          const CustomBottomNavBar(selectedMenu: MenuState.profile),
     );
   }
 
@@ -103,7 +107,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 title: Text(title),
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
-                  children: [
+                  children: const [
                     Text("Option 1"),
                     Text("Option 2"),
                     Text("Option 3"),
@@ -114,7 +118,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
-                      child: Text("Close")),
+                      child: const Text("Close")),
                 ],
               );
             });
@@ -126,13 +130,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
           children: [
             Text(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
                 color: kPrimaryLightColor,
               ),
             ),
-            Icon(
+            const Icon(
               Icons.arrow_forward_ios,
               color: kPrimaryLightColor,
             ),

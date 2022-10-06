@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../utils/constants.dart';
 import '../utils/enums.dart';
 import '../utils/custtom_bottom_nav_bar.dart';
 
@@ -17,16 +16,17 @@ class _MessageScreenState extends State<MessageScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Chat with Doctors",
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
+      body: const Padding(
+        padding: EdgeInsets.all(20),
         child: Text("Coming Soon",
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
       ),
-      bottomNavigationBar: CustomBottomNavBar(selectedMenu: MenuState.message),
+      bottomNavigationBar:
+          const CustomBottomNavBar(selectedMenu: MenuState.message),
     );
   }
 }

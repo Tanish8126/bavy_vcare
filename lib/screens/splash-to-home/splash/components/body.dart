@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_const
+
 import 'package:flutter/material.dart';
 
 import '../../../../utils/dafault_button2.dart';
@@ -22,25 +24,25 @@ class _BodyState extends State<Body> {
                 'assets/images/babyvcare.png',
                 width: 200,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 50,
               ),
-              Text(
+              const Text(
                 "Welcome to India's First Baby Vaccination app!",
-                style: TextStyle(
+                style: const TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.normal,
                     fontSize: 20),
                 textAlign: TextAlign.center,
               ),
-              Spacer(flex: 3),
+              const Spacer(flex: 3),
               DefaultButton2(
                 text: "Discover more ..",
                 press: () {
                   Navigator.pushNamed(context, LoginCheckScreen.routeName);
                 },
               ),
-              Spacer(),
+              const Spacer(),
             ],
           ),
         ),

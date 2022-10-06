@@ -8,7 +8,7 @@ import 'banner.dart';
 import '../../notificationscreen.dart';
 
 class Body extends StatefulWidget {
-  Body({Key? key}) : super(key: key);
+  const Body({Key? key}) : super(key: key);
 
   @override
   State<Body> createState() => _BodyState();
@@ -20,8 +20,16 @@ class _BodyState extends State<Body> {
     SizeConfig().init(context);
     return Scaffold(
         appBar: AppBar(
-            title: Text(
+            title: const Text(
               "Baby V Care",
+            ),
+            flexibleSpace: Container(
+              decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                      colors: [kbg, Color(0xff82c3df)],
+                      begin: FractionalOffset(0, 0),
+                      end: FractionalOffset(1.0, 0),
+                      tileMode: TileMode.clamp)),
             ),
             actions: <Widget>[
               Padding(
@@ -30,18 +38,18 @@ class _BodyState extends State<Body> {
                   onTap: () {
                     Navigator.pushNamed(context, NotificationScreen.routeName);
                   },
-                  child: Icon(
+                  child: const Icon(
                     Icons.notifications_active_sharp,
-                    color: kPrimaryLightColor,
+                    color: Colors.white,
                     size: 40,
                   ),
                 ),
               ),
             ]),
         body: Column(children: [
-          DiscountBanner(),
-          AppointmentBanner(),
-          Text(
+          const DiscountBanner(),
+          const AppointmentBanner(),
+          const Text(
             "Select The Required Vaccine",
             style: TextStyle(
                 color: Colors.black, fontWeight: FontWeight.bold, fontSize: 24),

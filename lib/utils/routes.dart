@@ -1,5 +1,3 @@
-import 'package:babyv_care/screens/book_appointment/appointmentform.dart';
-import 'package:babyv_care/screens/booking_calender.dart';
 import 'package:babyv_care/screens/bookings.dart';
 import 'package:babyv_care/screens/home/homescreen.dart';
 import 'package:babyv_care/screens/home/components/mainscreen.dart';
@@ -15,12 +13,12 @@ import 'package:flutter/widgets.dart';
 // We use name route
 // All our routes will be available here
 final Map<String, WidgetBuilder> routes = {
-  LoginScreen.routeName: (context) => LoginScreen(),
-  LoginCheckScreen.routeName: (context) => LoginCheckScreen(),
-  HomeScreen.routeName: (context) => HomeScreen(),
+  LoginScreen.routeName: (context) => const LoginScreen(),
+  LoginCheckScreen.routeName: (context) => const LoginCheckScreen(),
+  HomeScreen.routeName: (context) => const HomeScreen(),
   SplashScreen.routeName: (context) => SplashScreen(),
-  SettingsScreen.routeName: (context) => SettingsScreen(),
-  BookingScreen.routeName: (context) => BookingScreen(),
+  SettingsScreen.routeName: (context) => const SettingsScreen(),
+  BookingScreen.routeName: (context) => const BookingScreen(),
   MessageScreen.routeName: (context) => MessageScreen(),
   MainScreenForm.routeName: (context) => MainScreenForm(),
   // AppointmentForm.routeName: (context) => AppointmentForm(),

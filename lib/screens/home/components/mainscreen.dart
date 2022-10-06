@@ -1,3 +1,6 @@
+// ignore_for_file: non_constant_identifier_names
+
+import 'package:babyv_care/utils/default_form_field.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/constants.dart';
@@ -15,7 +18,6 @@ class MainScreenForm extends StatefulWidget {
 
 class _MainScreenFormState extends State<MainScreenForm> {
   final _formKey = GlobalKey<FormState>();
-  bool? _autovalidate = false;
 
   String _selectedAge = "Birth";
   var age = {
@@ -34,7 +36,7 @@ class _MainScreenFormState extends State<MainScreenForm> {
     "9-12 Years": '13',
   };
 
-  List _ages = [];
+  final List _ages = [];
   AgeDependentDropDown() {
     age.forEach((key, value) {
       _ages.add(key);
@@ -93,7 +95,6 @@ class _MainScreenFormState extends State<MainScreenForm> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     AgeDependentDropDown();
   }
@@ -106,43 +107,31 @@ class _MainScreenFormState extends State<MainScreenForm> {
       child: Stack(
         children: [
           Container(
-            padding: EdgeInsets.only(left: 10, right: 10),
+            padding: const EdgeInsets.only(left: 10, right: 10),
             height: 700,
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 30),
-                  DropdownButtonFormField(
-                    alignment: AlignmentDirectional.center,
+                  DefaultFormField(
+                    labeltext: "Select the baby's Age",
+                    hinttext: "Select Age",
+                    icon: const Icon(Icons.arrow_downward),
                     items: _ages.map((age) {
                       return DropdownMenuItem(
-                        child: new Text(age),
                         value: age,
+                        child: Text(
+                          age,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
                       );
                     }).toList(),
-                    value: _selectedAge,
-                    isExpanded: true,
-                    icon: const Icon(Icons.arrow_downward),
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: kbg)),
-                      prefixIcon: Icon(Icons.man),
-                      labelStyle: TextStyle(
-                          color: kMainColor,
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold),
-                      label: Text("Select the baby's Age"),
-                    ),
-                    elevation: 0,
-                    hint: Text(" Select Age"),
-                    iconEnabledColor: Colors.black,
-                    style: const TextStyle(color: Colors.black),
-                    validator: (value) =>
-                        value == null ? 'field required' : null,
+                    prefixicon: const Icon(Icons.man),
                     onChanged: (newValue) {
                       setState(() {
                         _vaccines = [];
@@ -150,36 +139,18 @@ class _MainScreenFormState extends State<MainScreenForm> {
                         _selectedAge = "$newValue";
                       });
                     },
+                    validate: (value) =>
+                        value == null ? 'field required' : null,
+                    value: _selectedAge,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
-                  DropdownButtonFormField(
-                    alignment: AlignmentDirectional.center,
-                    value: _selectedVaccine,
-                    isExpanded: true,
+                  DefaultFormField(
+                    labeltext: "Choose the required Vaccine",
+                    hinttext: " Select Vaccine",
                     icon: const Icon(Icons.arrow_downward),
-                    decoration: InputDecoration(
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 0, vertical: 20),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: kbg)),
-                      prefixIcon: Icon(Icons.man),
-                      labelStyle: TextStyle(
-                          color: kMainColor,
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold),
-                      label: Text("Choose the required Vaccine"),
-                    ),
-                    elevation: 50,
-                    hint: Text(" Select Vaccine"),
-                    iconEnabledColor: Colors.black,
-                    style: const TextStyle(color: Colors.black),
-                    validator: (value) =>
-                        value == null ? 'field required' : null,
+                    prefixicon: const Icon(Icons.man),
                     onChanged: (newValue) {
                       setState(() {
                         _selectedVaccine = "$newValue";
@@ -187,7 +158,8 @@ class _MainScreenFormState extends State<MainScreenForm> {
                     },
                     items: _vaccines.map((vaccine) {
                       return DropdownMenuItem(
-                        child: new Text(
+                        value: vaccine,
+                        child: Text(
                           vaccine,
                           style: const TextStyle(
                             fontSize: 14,
@@ -195,10 +167,11 @@ class _MainScreenFormState extends State<MainScreenForm> {
                             color: Colors.black,
                           ),
                         ),
-                        value: vaccine,
                       );
                     }).toList(),
-                    iconDisabledColor: Colors.grey,
+                    validate: (value) =>
+                        value == null ? 'field required' : null,
+                    value: _selectedVaccine,
                   ),
                   const SizedBox(height: 30),
                   DefaultButton(
@@ -212,7 +185,7 @@ class _MainScreenFormState extends State<MainScreenForm> {
                               AppointmentForm(_selectedAge, _selectedVaccine)));
                     },
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   DefaultButton(

@@ -1,5 +1,6 @@
 import 'package:babyv_care/screens/home/homescreen.dart';
 import 'package:flutter/material.dart';
+// ignore: depend_on_referenced_packages
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../screens/bookings.dart';
@@ -18,12 +19,12 @@ class CustomBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color inActiveIconColor = kPrimaryLightColor;
+    const Color inActiveIconColor = kPrimaryLightColor;
     return Container(
-      padding: EdgeInsets.only(bottom: 10, top: 0),
+      padding: const EdgeInsets.only(bottom: 10, top: 0),
       alignment: Alignment.center,
       height: 60,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: kbg,
       ),
       child: Row(
