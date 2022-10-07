@@ -26,6 +26,7 @@ dependencies:
   flutter_local_notifications: ^9.9.1
   json_annotation: ^4.7.0
   uuid: ^3.0.6
+  get: ^4.6.5
 
 dev_dependencies:
   flutter_test:

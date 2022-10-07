@@ -3,7 +3,6 @@
 import 'package:babyv_care/screens/succees_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:uuid/uuid.dart';
 
 import '../../utils/constants.dart';
 import '../../utils/dafault_button.dart';
@@ -12,7 +11,6 @@ import '../../utils/default_text_field.dart';
 
 List<String> genders = <String>['Male', 'Female'];
 List<String> relations = <String>['Father', 'Mother', 'Gaurdian'];
-List<String> doctors = <String>['Dr. Batra', 'Dr. Suamn', 'Dr. Rahul'];
 
 class AppointmentForm extends StatefulWidget {
   static String routeName = "/appointmentform";
@@ -26,11 +24,12 @@ class AppointmentForm extends StatefulWidget {
 
 class _AppointmentFormState extends State<AppointmentForm> {
   final _formKey = GlobalKey<FormState>();
-  var uuid = const Uuid();
 
   String genderValue = genders.first;
   String relationValue = relations.first;
-  String doctorValue = doctors.first;
+
+  var doctors;
+  var setDefaultMake = true, setDefaultMakeModel = true;
 
   var name = "";
   var babyname = "";
@@ -106,6 +105,7 @@ class _AppointmentFormState extends State<AppointmentForm> {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('doctor: $doctors');
     return SafeArea(
         child: Scaffold(
             appBar: AppBar(
@@ -120,326 +120,377 @@ class _AppointmentFormState extends State<AppointmentForm> {
               ),
             ),
             body: Form(
-              key: _formKey,
-              child: Padding(
-                padding: const EdgeInsets.all(10),
-                child: Column(
-                  children: [
-                    Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: kPrimaryColor),
-                      child: Column(
-                        children: [
-                          const Text("Selected Age",
-                              style: TextStyle(
-                                  color: kMainColor,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold)),
-                          Text(widget.babyage,
-                              style: const TextStyle(
-                                  color: kMainColor,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.normal)),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          const Text("Selected Vaccine",
-                              style: TextStyle(
-                                  color: kMainColor,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold)),
-                          Text(widget.vaccine,
-                              style: const TextStyle(
-                                  color: kMainColor,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.normal)),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: Stack(children: [
-                        SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              const Text(
-                                "Fill Out Details",
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
-                              const SizedBox(height: 30),
-                              DefaultField(
-                                controller: nameController,
-                                keyboardtype: TextInputType.name,
-                                maxlength: null,
-                                validate: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please Enter Your Full Name';
-                                  }
-                                  return null;
-                                },
-                                labeltext: "Parent Name",
-                                hinttext: "Enter Your Full Name",
-                              ),
-                              const SizedBox(height: 30),
-                              DefaultField(
-                                controller: babynameController,
-                                keyboardtype: TextInputType.name,
-                                maxlength: null,
-                                validate: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please Enter Baby Name';
-                                  }
-                                  return null;
-                                },
-                                hinttext: "Enter Baby Full Name",
-                                labeltext: "Baby Name",
-                              ),
-                              const SizedBox(height: 30),
-                              TextField(
-                                  controller: dobController,
-                                  enableInteractiveSelection: false,
-                                  readOnly: true,
-                                  decoration: InputDecoration(
-                                      fillColor: kTextColor,
-                                      labelText: "Baby DOB",
-                                      enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(30),
-                                      ),
-                                      hintText:
-                                          "${_dateTime.day}/${_dateTime.month}/${_dateTime.year}",
-                                      floatingLabelBehavior:
-                                          FloatingLabelBehavior.always,
-                                      hintStyle:
-                                          const TextStyle(color: Colors.black),
-                                      labelStyle: const TextStyle(
-                                          color: kMainColor,
-                                          fontSize: 24,
-                                          fontWeight: FontWeight.bold))),
-                              Center(
-                                child: MaterialButton(
-                                  onPressed: _showDatePicker,
-                                  color: kPrimaryColor,
-                                  child: const Text(
-                                    "Choose Baby Date of Birth",
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 30,
-                              ),
-                              DefaultField(
-                                controller: mobileController,
-                                keyboardtype: TextInputType.phone,
-                                maxlength: 10,
-                                validate: (value) {
-                                  if (value!.isEmpty || value.length < 10) {
-                                    return 'Please Enter 10 Digit Mobile Number';
-                                  }
-                                  return null;
-                                },
-                                hinttext: "Enter Mobile Number",
-                                prefix: const Padding(
-                                  padding: EdgeInsets.all(4),
-                                  child: Text('+91'),
-                                ),
-                                labeltext: "Mobile Number",
-                              ),
-                              const SizedBox(
-                                height: 30,
-                              ),
-                              TextFormField(
-                                keyboardType: TextInputType.streetAddress,
-                                style:
-                                    const TextStyle(color: kPrimaryLightColor),
-                                controller: addressController,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please Enter Your Address';
-                                  }
-                                  return null;
-                                },
-                                decoration: InputDecoration(
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(30),
-                                    ),
-                                    fillColor: kTextColor,
-                                    labelText: "Address",
-                                    hintText: "Enter Your Address",
-                                    floatingLabelBehavior:
-                                        FloatingLabelBehavior.always,
-                                    hintStyle: const TextStyle(
-                                        color: kPrimaryLightColor),
-                                    labelStyle: const TextStyle(
-                                        color: kMainColor,
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.bold)),
-                              ),
-                              const SizedBox(height: 30),
-                              DropdownButtonFormField(
-                                alignment: AlignmentDirectional.center,
-                                items: genders.map<DropdownMenuItem<String>>(
-                                    (String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Text(value),
-                                  );
-                                }).toList(),
-                                value: genderValue,
-                                icon: const Icon(Icons.arrow_downward),
-                                decoration: InputDecoration(
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(30),
-                                    ),
-                                    focusedBorder: const OutlineInputBorder(
-                                        borderSide: BorderSide(color: kbg)),
-                                    icon: const Icon(Icons.man_sharp),
-                                    labelStyle: const TextStyle(
-                                        color: kMainColor,
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.bold),
-                                    label: const Text("Select Gender")),
-                                borderRadius: BorderRadius.circular(10),
-                                elevation: 50,
-                                hint: const Text(" Select gender"),
-                                iconEnabledColor: Colors.black,
-                                style: const TextStyle(color: Colors.black),
-                                onChanged: (String? value) {
-                                  setState(() {
-                                    genderValue = value!;
-                                  });
-                                },
-                              ),
-                              const SizedBox(
-                                height: 40,
-                              ),
-                              DropdownButtonFormField(
-                                alignment: AlignmentDirectional.center,
-                                items: relations.map<DropdownMenuItem<String>>(
-                                    (String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Text(value),
-                                  );
-                                }).toList(),
-                                value: relationValue,
-                                isExpanded: true,
-                                icon: const Icon(Icons.arrow_downward),
-                                decoration: InputDecoration(
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(30),
-                                  ),
-                                  focusedBorder: const OutlineInputBorder(
-                                      borderSide: BorderSide(color: kbg)),
-                                  prefixIcon: const Icon(Icons.man),
-                                  labelStyle: const TextStyle(
-                                      color: kMainColor,
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold),
-                                  label: const Text("Relationship with child"),
-                                ),
-                                elevation: 50,
-                                hint: const Text(" Select gender"),
-                                iconEnabledColor: Colors.black,
-                                style: const TextStyle(color: Colors.black),
-                                onChanged: (String? value) {
-                                  setState(() {
-                                    relationValue = value!;
-                                  });
-                                },
-                              ),
-                              const SizedBox(height: 30),
-                              Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: kPrimaryColor),
-                                padding:
-                                    const EdgeInsets.only(top: 20, bottom: 20),
-                                child: Column(
-                                  children: [
-                                    const Text(
-                                      "Make Appointment",
+                key: _formKey,
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: StreamBuilder<QuerySnapshot>(
+                      stream: FirebaseFirestore.instance
+                          .collection('doctors')
+                          .orderBy('name')
+                          .snapshots(),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<QuerySnapshot> snapshot) {
+                        // Safety check to ensure that snapshot contains data
+                        // without this safety check, StreamBuilder dirty state warnings will be thrown
+                        if (!snapshot.hasData) return Container();
+                        // Set this value for default,
+                        // setDefault will change if an item was selected
+                        // First item from the List will be displayed
+                        if (setDefaultMake) {
+                          doctors = snapshot.data!.docs[0].get('name');
+                          debugPrint('setDefault make: $doctors');
+                        }
+                        return Column(
+                          children: [
+                            Container(
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: kPrimaryColor),
+                              child: Column(
+                                children: [
+                                  const Text("Selected Age",
                                       style: TextStyle(
+                                          color: kMainColor,
                                           fontSize: 20,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    const SizedBox(height: 20),
-                                    DropdownButtonFormField(
-                                      items: doctors
-                                          .map<DropdownMenuItem<String>>(
-                                              (String value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value,
-                                          child: Text(value),
-                                        );
-                                      }).toList(),
-                                      value: doctorValue,
-                                      isExpanded: true,
-                                      decoration: const InputDecoration(
-                                        prefixIcon:
-                                            Icon(Icons.medication_outlined),
-                                        labelStyle: TextStyle(
-                                            color: kMainColor,
-                                            fontSize: 24,
-                                            fontWeight: FontWeight.bold),
-                                        label: Text("Selact Doctor"),
+                                          fontWeight: FontWeight.bold)),
+                                  Text(widget.babyage,
+                                      style: const TextStyle(
+                                          color: kMainColor,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.normal)),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  const Text("Selected Vaccine",
+                                      style: TextStyle(
+                                          color: kMainColor,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold)),
+                                  Text(widget.vaccine,
+                                      style: const TextStyle(
+                                          color: kMainColor,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.normal)),
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              child: Stack(children: [
+                                SingleChildScrollView(
+                                  child: Column(
+                                    children: [
+                                      const SizedBox(
+                                        height: 10,
                                       ),
-                                      borderRadius: BorderRadius.circular(10),
-                                      elevation: 50,
-                                      hint: const Text(" Select gender"),
-                                      iconEnabledColor: Colors.blue,
-                                      style:
-                                          const TextStyle(color: Colors.black),
-                                      onChanged: (String? value) {
-                                        setState(() {
-                                          doctorValue = value!;
-                                        });
-                                      },
-                                    ),
-                                    const SizedBox(height: 20),
-                                    DefaultButton2(
-                                        text: "Choose Your Slot", press: () {}),
-                                    Text(uuid.v4()),
-                                  ],
+                                      const Text(
+                                        "Fill Out Details",
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      const SizedBox(height: 30),
+                                      DefaultField(
+                                        controller: nameController,
+                                        keyboardtype: TextInputType.name,
+                                        maxlength: null,
+                                        validate: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'Please Enter Your Full Name';
+                                          }
+                                          return null;
+                                        },
+                                        labeltext: "Parent Name",
+                                        hinttext: "Enter Your Full Name",
+                                      ),
+                                      const SizedBox(height: 30),
+                                      DefaultField(
+                                        controller: babynameController,
+                                        keyboardtype: TextInputType.name,
+                                        maxlength: null,
+                                        validate: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'Please Enter Baby Name';
+                                          }
+                                          return null;
+                                        },
+                                        hinttext: "Enter Baby Full Name",
+                                        labeltext: "Baby Name",
+                                      ),
+                                      const SizedBox(height: 30),
+                                      TextField(
+                                          controller: dobController,
+                                          enableInteractiveSelection: false,
+                                          readOnly: true,
+                                          decoration: InputDecoration(
+                                              fillColor: kTextColor,
+                                              labelText: "Baby DOB",
+                                              enabledBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(30),
+                                              ),
+                                              hintText:
+                                                  "${_dateTime.day}/${_dateTime.month}/${_dateTime.year}",
+                                              floatingLabelBehavior:
+                                                  FloatingLabelBehavior.always,
+                                              hintStyle: const TextStyle(
+                                                  color: Colors.black),
+                                              labelStyle: const TextStyle(
+                                                  color: kMainColor,
+                                                  fontSize: 24,
+                                                  fontWeight:
+                                                      FontWeight.bold))),
+                                      Center(
+                                        child: MaterialButton(
+                                          onPressed: _showDatePicker,
+                                          color: kPrimaryColor,
+                                          child: const Text(
+                                            "Choose Baby Date of Birth",
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 30,
+                                      ),
+                                      DefaultField(
+                                        controller: mobileController,
+                                        keyboardtype: TextInputType.phone,
+                                        maxlength: 10,
+                                        validate: (value) {
+                                          if (value!.isEmpty ||
+                                              value.length < 10) {
+                                            return 'Please Enter 10 Digit Mobile Number';
+                                          }
+                                          return null;
+                                        },
+                                        hinttext: "Enter Mobile Number",
+                                        prefix: const Padding(
+                                          padding: EdgeInsets.all(4),
+                                          child: Text('+91'),
+                                        ),
+                                        labeltext: "Mobile Number",
+                                      ),
+                                      const SizedBox(
+                                        height: 30,
+                                      ),
+                                      TextFormField(
+                                        keyboardType:
+                                            TextInputType.streetAddress,
+                                        style: const TextStyle(
+                                            color: kPrimaryLightColor),
+                                        controller: addressController,
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'Please Enter Your Address';
+                                          }
+                                          return null;
+                                        },
+                                        decoration: InputDecoration(
+                                            enabledBorder: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(30),
+                                            ),
+                                            fillColor: kTextColor,
+                                            labelText: "Address",
+                                            hintText: "Enter Your Address",
+                                            floatingLabelBehavior:
+                                                FloatingLabelBehavior.always,
+                                            hintStyle: const TextStyle(
+                                                color: kPrimaryLightColor),
+                                            labelStyle: const TextStyle(
+                                                color: kMainColor,
+                                                fontSize: 24,
+                                                fontWeight: FontWeight.bold)),
+                                      ),
+                                      const SizedBox(height: 30),
+                                      DropdownButtonFormField(
+                                        alignment: AlignmentDirectional.center,
+                                        items: genders
+                                            .map<DropdownMenuItem<String>>(
+                                                (String value) {
+                                          return DropdownMenuItem<String>(
+                                            value: value,
+                                            child: Text(value),
+                                          );
+                                        }).toList(),
+                                        value: genderValue,
+                                        icon: const Icon(Icons.arrow_downward),
+                                        decoration: InputDecoration(
+                                            enabledBorder: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(30),
+                                            ),
+                                            focusedBorder:
+                                                const OutlineInputBorder(
+                                                    borderSide:
+                                                        BorderSide(color: kbg)),
+                                            icon: const Icon(Icons.man_sharp),
+                                            labelStyle: const TextStyle(
+                                                color: kMainColor,
+                                                fontSize: 24,
+                                                fontWeight: FontWeight.bold),
+                                            label: const Text("Select Gender")),
+                                        borderRadius: BorderRadius.circular(10),
+                                        elevation: 50,
+                                        hint: const Text(" Select gender"),
+                                        iconEnabledColor: Colors.black,
+                                        style: const TextStyle(
+                                            color: Colors.black),
+                                        onChanged: (String? value) {
+                                          setState(() {
+                                            genderValue = value!;
+                                          });
+                                        },
+                                      ),
+                                      const SizedBox(
+                                        height: 40,
+                                      ),
+                                      DropdownButtonFormField(
+                                        alignment: AlignmentDirectional.center,
+                                        items: relations
+                                            .map<DropdownMenuItem<String>>(
+                                                (String value) {
+                                          return DropdownMenuItem<String>(
+                                            value: value,
+                                            child: Text(value),
+                                          );
+                                        }).toList(),
+                                        value: relationValue,
+                                        isExpanded: true,
+                                        icon: const Icon(Icons.arrow_downward),
+                                        decoration: InputDecoration(
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(30),
+                                          ),
+                                          focusedBorder:
+                                              const OutlineInputBorder(
+                                                  borderSide:
+                                                      BorderSide(color: kbg)),
+                                          prefixIcon: const Icon(Icons.man),
+                                          labelStyle: const TextStyle(
+                                              color: kMainColor,
+                                              fontSize: 24,
+                                              fontWeight: FontWeight.bold),
+                                          label: const Text(
+                                              "Relationship with child"),
+                                        ),
+                                        elevation: 50,
+                                        hint: const Text(" Select gender"),
+                                        iconEnabledColor: Colors.black,
+                                        style: const TextStyle(
+                                            color: Colors.black),
+                                        onChanged: (String? value) {
+                                          setState(() {
+                                            relationValue = value!;
+                                          });
+                                        },
+                                      ),
+                                      const SizedBox(height: 30),
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            color: kPrimaryColor),
+                                        padding: const EdgeInsets.only(
+                                            top: 20, bottom: 20),
+                                        child: Column(
+                                          children: [
+                                            const Text(
+                                              "Make Appointment",
+                                              style: TextStyle(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            const SizedBox(height: 20),
+                                            DropdownButtonFormField(
+                                              items: snapshot.data!.docs
+                                                  .map((value) {
+                                                return DropdownMenuItem(
+                                                  value: value.get('name'),
+                                                  child: Text(
+                                                      '${value.get('name')}'),
+                                                );
+                                              }).toList(),
+                                              value: doctors,
+                                              isExpanded: true,
+                                              decoration: const InputDecoration(
+                                                prefixIcon: Icon(
+                                                    Icons.medication_outlined),
+                                                labelStyle: TextStyle(
+                                                    color: kMainColor,
+                                                    fontSize: 24,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                                label: Text("Selact Doctor"),
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              elevation: 50,
+                                              hint:
+                                                  const Text(" Select gender"),
+                                              iconEnabledColor: Colors.blue,
+                                              style: const TextStyle(
+                                                  color: Colors.black),
+                                              onChanged: (value) {
+                                                debugPrint(
+                                                    'selected onchange: $value');
+                                                setState(
+                                                  () {
+                                                    debugPrint(
+                                                        'make selected: $value');
+                                                    // Selected value will be stored
+                                                    doctors = value;
+                                                    // Default dropdown value won't be displayed anymore
+                                                    setDefaultMake = false;
+                                                    // Set makeModel to true to display first car from list
+                                                    setDefaultMakeModel = true;
+                                                  },
+                                                );
+                                              },
+                                            ),
+                                            const SizedBox(height: 20),
+                                            DefaultButton2(
+                                                text: "Choose Your Slot",
+                                                press: () {}),
+                                          ],
+                                        ),
+                                      ),
+                                      const SizedBox(height: 20),
+                                      DefaultButton(
+                                        text: "Confirm Booking",
+                                        press: () {
+                                          if (_formKey.currentState!
+                                              .validate()) {
+                                            setState(() {
+                                              name = nameController.text;
+                                              babyname =
+                                                  babynameController.text;
+                                              mobile = mobileController.text;
+                                              address = addressController.text;
+                                              gender = genderValue;
+                                              relation = relationValue;
+                                              doctor = doctors;
+                                              vaccine = vaccine;
+                                              babyage = babyage;
+                                              addUser();
+                                              clearText();
+                                              Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          const SuccessScreen()));
+                                            });
+                                          }
+                                        },
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(height: 20),
-                              DefaultButton(
-                                text: "Confirm Booking",
-                                press: () {
-                                  if (_formKey.currentState!.validate()) {
-                                    setState(() {
-                                      name = nameController.text;
-                                      babyname = babynameController.text;
-                                      mobile = mobileController.text;
-                                      address = addressController.text;
-                                      gender = genderValue;
-                                      relation = relationValue;
-                                      doctor = doctorValue;
-                                      vaccine = vaccine;
-                                      babyage = babyage;
-                                      addUser();
-                                      clearText();
-                                      Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const SuccessScreen()));
-                                    });
-                                  }
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                      ]),
-                    )
-                  ],
-                ),
-              ),
-            )));
+                              ]),
+                            )
+                          ],
+                        );
+                      }),
+                ))));
   }
 }

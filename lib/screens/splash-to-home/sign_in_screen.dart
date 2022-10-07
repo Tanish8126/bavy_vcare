@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:babyv_care/utils/default_text_field.dart';
 import 'package:flutter/material.dart';
 
@@ -37,8 +39,8 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           body: Column(children: [
             Material(
-              borderRadius: const BorderRadius.only(
-                  bottomRight: const Radius.circular(100)),
+              borderRadius:
+                  const BorderRadius.only(bottomRight: Radius.circular(100)),
               color: const Color.fromARGB(255, 134, 190, 239),
               elevation: 10,
               child: SizedBox(
