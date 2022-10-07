@@ -46,10 +46,10 @@ class _BodyState extends State<Body> {
                 ),
               ),
             ]),
-        body: Column(children: [
-          const DiscountBanner(),
-          const AppointmentBanner(),
-          const Text(
+        body: Column(children: const [
+          DiscountBanner(),
+          AppointmentBanner(),
+          Text(
             "Select The Required Vaccine",
             style: TextStyle(
                 color: Colors.black, fontWeight: FontWeight.bold, fontSize: 24),

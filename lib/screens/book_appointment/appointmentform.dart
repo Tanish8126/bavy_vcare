@@ -1,6 +1,6 @@
 // ignore_for_file: must_be_immutable, prefer_if_null_operators, unnecessary_null_comparison
 
-import 'package:babyv_care/screens/succees_screen.dart';
+import 'package:babyv_care/screens/booking_calender.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -45,7 +45,7 @@ class _AppointmentFormState extends State<AppointmentForm> {
   final nameController = TextEditingController();
   final babynameController = TextEditingController();
   final dobController = TextEditingController();
-  final mobileController = TextEditingController();
+  final TextEditingController mobileController = TextEditingController();
   final addressController = TextEditingController();
 
   @override
@@ -130,12 +130,7 @@ class _AppointmentFormState extends State<AppointmentForm> {
                           .snapshots(),
                       builder: (BuildContext context,
                           AsyncSnapshot<QuerySnapshot> snapshot) {
-                        // Safety check to ensure that snapshot contains data
-                        // without this safety check, StreamBuilder dirty state warnings will be thrown
                         if (!snapshot.hasData) return Container();
-                        // Set this value for default,
-                        // setDefault will change if an item was selected
-                        // First item from the List will be displayed
                         if (setDefaultMake) {
                           doctors = snapshot.data!.docs[0].get('name');
                           debugPrint('setDefault make: $doctors');
@@ -473,12 +468,17 @@ class _AppointmentFormState extends State<AppointmentForm> {
                                               doctor = doctors;
                                               vaccine = vaccine;
                                               babyage = babyage;
-                                              addUser();
-                                              clearText();
+                                              //  addUser();
+                                              //clearText();
                                               Navigator.of(context).push(
                                                   MaterialPageRoute(
                                                       builder: (context) =>
-                                                          const SuccessScreen()));
+                                                          BookingPage(
+                                                            nameController.text,
+                                                            mobileController
+                                                                .text,
+                                                            vaccine,
+                                                          )));
                                             });
                                           }
                                         },
