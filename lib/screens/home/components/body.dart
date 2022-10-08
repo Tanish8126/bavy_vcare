@@ -1,10 +1,9 @@
 import 'package:babyv_care/screens/home/components/appointmentbanner.dart';
-import 'package:babyv_care/screens/home/components/mainscreen.dart';
+import 'package:babyv_care/screens/home/components/homecreen_form.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/constants.dart';
-import '../../../utils/size_config.dart';
-import 'banner.dart';
+import 'welcome_banner.dart';
 import '../../notificationscreen.dart';
 
 class Body extends StatefulWidget {
@@ -17,7 +16,6 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
     return Scaffold(
         appBar: AppBar(
             title: const Text(
@@ -47,7 +45,7 @@ class _BodyState extends State<Body> {
               ),
             ]),
         body: Column(children: const [
-          DiscountBanner(),
+          WelcomeBanner(),
           AppointmentBanner(),
           Text(
             "Select The Required Vaccine",
@@ -55,7 +53,7 @@ class _BodyState extends State<Body> {
                 color: Colors.black, fontWeight: FontWeight.bold, fontSize: 24),
             textAlign: TextAlign.center,
           ),
-          Expanded(child: MainScreenForm())
+          Expanded(child: HomeScreenForm())
         ]));
   }
 }

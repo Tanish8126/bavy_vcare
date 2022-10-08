@@ -62,7 +62,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             const Divider(
               height: 15,
               thickness: 2,
-              color: kMainColor,
+              color: kBlack,
             ),
             const SizedBox(
               height: 10,

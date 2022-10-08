@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../screens/bookings.dart';
+import '../screens/booking_screen.dart';
 import '../screens/messages.dart';
 import '../screens/settings/settings.dart';
 import 'constants.dart';

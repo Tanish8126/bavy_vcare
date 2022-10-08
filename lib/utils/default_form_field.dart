@@ -7,7 +7,6 @@ import 'constants.dart';
 class DefaultFormField extends StatelessWidget {
   const DefaultFormField(
       {Key? key,
-      this.icon,
       this.value,
       this.labeltext,
       this.hinttext,
@@ -26,26 +25,24 @@ class DefaultFormField extends StatelessWidget {
   final onChanged;
   final prefix;
   final prefixicon;
-  final icon;
 
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
         items: items,
         onChanged: onChanged,
-        alignment: AlignmentDirectional.center,
         value: value,
         isExpanded: true,
-        icon: icon,
+        icon: const Icon(Icons.arrow_downward),
         decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30),
           ),
           focusedBorder:
-              const OutlineInputBorder(borderSide: BorderSide(color: kbg)),
+              const OutlineInputBorder(borderSide: BorderSide(color: kBlack)),
           prefixIcon: prefixicon,
           labelStyle: const TextStyle(
-              color: kMainColor, fontSize: 24, fontWeight: FontWeight.bold),
+              color: kBlack, fontSize: 24, fontWeight: FontWeight.bold),
           label: Text(labeltext!),
         ),
         elevation: 0,

@@ -35,21 +35,16 @@ class _OtpScreenState extends State<OtpScreen> {
     return Scaffold(
         key: _scaffoldkey,
         appBar: AppBar(
-            title: const Text('OTP Verification'),
-            flexibleSpace: Container(
-              decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                      colors: [kbg, Color(0xff82c3df)],
-                      begin: FractionalOffset(0, 0),
-                      end: FractionalOffset(1.0, 0),
-                      tileMode: TileMode.clamp)),
-            )),
+          title: const Text('OTP Verification'),
+          backgroundColor: kbg,
+        ),
         body: Column(
           children: [
             Material(
                 borderRadius:
                     const BorderRadius.only(bottomLeft: Radius.circular(100)),
-                color: const Color.fromARGB(255, 134, 190, 239),
+                color: kbg,
+                elevation: 10,
                 child: SizedBox(
                   height: 300,
                   width: double.infinity,

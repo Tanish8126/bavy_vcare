@@ -28,20 +28,13 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Scaffold(
           appBar: AppBar(
             title: const Text('Login'),
-            flexibleSpace: Container(
-              decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                      colors: [kbg, Color(0xff82c3df)],
-                      begin: FractionalOffset(0, 0),
-                      end: FractionalOffset(1.0, 0),
-                      tileMode: TileMode.clamp)),
-            ),
+            backgroundColor: kbg,
           ),
           body: Column(children: [
             Material(
               borderRadius:
                   const BorderRadius.only(bottomRight: Radius.circular(100)),
-              color: const Color.fromARGB(255, 134, 190, 239),
+              color: kbg,
               elevation: 10,
               child: SizedBox(
                 height: 300,
@@ -69,7 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           padding: EdgeInsets.all(4),
                           child: Text(
                             '+91',
-                            style: TextStyle(color: kMainColor),
+                            style: TextStyle(color: kBlack),
                           ),
                         ),
                         validate: (value) {

@@ -28,6 +28,7 @@ dependencies:
   uuid: ^3.0.6
   table_calendar: ^3.0.7
   auth: ^8.1.0
+  provider: ^6.0.3
 
 dev_dependencies:
   flutter_test:

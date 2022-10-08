@@ -4,17 +4,18 @@ import 'package:babyv_care/utils/default_form_field.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/dafault_button.dart';
+import '../../../utils/size_config.dart';
 import '../../book_appointment/appointmentform.dart';
 
-class MainScreenForm extends StatefulWidget {
+class HomeScreenForm extends StatefulWidget {
   static String routeName = "/mainscreenform";
-  const MainScreenForm({Key? key}) : super(key: key);
+  const HomeScreenForm({Key? key}) : super(key: key);
 
   @override
-  State<MainScreenForm> createState() => _MainScreenFormState();
+  State<HomeScreenForm> createState() => _HomeScreenFormState();
 }
 
-class _MainScreenFormState extends State<MainScreenForm> {
+class _HomeScreenFormState extends State<HomeScreenForm> {
   final _formKey = GlobalKey<FormState>();
 
   String _selectedAge = "Birth";
@@ -106,16 +107,15 @@ class _MainScreenFormState extends State<MainScreenForm> {
         children: [
           Container(
             padding: const EdgeInsets.only(left: 10, right: 10),
-            height: 700,
+            height: SizeConfig.screenHeight * 0.5,
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 30),
                   DefaultFormField(
-                    labeltext: "Select the baby's Age",
+                    labeltext: "Select Baby's Age",
                     hinttext: "Select Age",
-                    icon: const Icon(Icons.arrow_downward),
                     items: _ages.map((age) {
                       return DropdownMenuItem(
                         value: age,
@@ -145,9 +145,8 @@ class _MainScreenFormState extends State<MainScreenForm> {
                     height: 30,
                   ),
                   DefaultFormField(
-                    labeltext: "Choose the required Vaccine",
+                    labeltext: "Choose Vaccine",
                     hinttext: " Select Vaccine",
-                    icon: const Icon(Icons.arrow_downward),
                     prefixicon: const Icon(Icons.man),
                     onChanged: (newValue) {
                       setState(() {

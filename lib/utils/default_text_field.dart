@@ -30,13 +30,13 @@ class DefaultField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       keyboardType: keyboardtype,
-      style: const TextStyle(color: kMainColor),
+      style: const TextStyle(color: kBlack),
       controller: controller,
       maxLength: maxlength,
       validator: validate,
       decoration: InputDecoration(
           focusedBorder: const OutlineInputBorder(
-              borderSide: const BorderSide(color: kbg)),
+              borderSide: const BorderSide(color: kBlack)),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30),
           ),
@@ -48,7 +48,7 @@ class DefaultField extends StatelessWidget {
           floatingLabelBehavior: FloatingLabelBehavior.always,
           hintStyle: const TextStyle(color: kPrimaryLightColor),
           labelStyle: const TextStyle(
-              color: kMainColor, fontSize: 24, fontWeight: FontWeight.bold)),
+              color: kBlack, fontSize: 24, fontWeight: FontWeight.bold)),
     );
   }
 }

@@ -5,7 +5,7 @@ import '../utils/custtom_bottom_nav_bar.dart';
 
 class MessageScreen extends StatefulWidget {
   static String routeName = '/messageing';
-  MessageScreen({Key? key}) : super(key: key);
+  const MessageScreen({Key? key}) : super(key: key);
 
   @override
   State<MessageScreen> createState() => _MessageScreenState();
