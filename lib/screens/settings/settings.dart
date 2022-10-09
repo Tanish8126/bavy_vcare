@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_new, unnecessary_const
+// ignore_for_file: unnecessary_new, unnecessary_const, use_build_context_synchronously
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -82,7 +82,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
                   Navigator.pushAndRemoveUntil(
                       context,
-                      MaterialPageRoute(builder: (context) => LoginScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => const LoginScreen()),
                       (route) => false);
                 },
                 text: "Sign Out",

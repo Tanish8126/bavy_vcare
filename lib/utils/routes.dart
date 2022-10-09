@@ -1,14 +1,15 @@
-import 'package:babyv_care/screens/booking_screen.dart';
-import 'package:babyv_care/screens/home/homescreen.dart';
-import 'package:babyv_care/screens/home/components/homecreen_form.dart';
-import 'package:babyv_care/screens/messages.dart';
-import 'package:babyv_care/screens/notificationscreen.dart';
-import 'package:babyv_care/screens/settings/settings.dart';
-import 'package:babyv_care/screens/splash-to-home/sign_in_screen.dart';
-import 'package:babyv_care/screens/splash-to-home/login_check.dart';
-import 'package:babyv_care/screens/splash-to-home/splash/splash_screen.dart';
-import 'package:babyv_care/screens/uploadscreen.dart';
 import 'package:flutter/widgets.dart';
+
+import '../screens/booking_screen.dart';
+import '../screens/home/components/homecreen_form.dart';
+import '../screens/home/homescreen.dart';
+import '../screens/messages.dart';
+import '../screens/notificationscreen.dart';
+import '../screens/settings/settings.dart';
+import '../screens/splash-to-home/login_check.dart';
+import '../screens/splash-to-home/sign_in_screen.dart';
+import '../screens/splash-to-home/splash/splash_screen.dart';
+import '../screens/uploadscreen.dart';
 
 // We use name route
 // All our routes will be available here
@@ -19,12 +20,12 @@ final Map<String, WidgetBuilder> routes = {
   SplashScreen.routeName: (context) => const SplashScreen(),
   SettingsScreen.routeName: (context) => const SettingsScreen(),
   BookingScreen.routeName: (context) => BookingScreen(
-        bookingData: [],
+        bookingData: const [],
       ),
   MessageScreen.routeName: (context) => const MessageScreen(),
   HomeScreenForm.routeName: (context) => const HomeScreenForm(),
   // AppointmentForm.routeName: (context) => AppointmentForm(),
-  NotificationScreen.routeName: (context) => NotificationScreen(),
+  NotificationScreen.routeName: (context) => const NotificationScreen(),
   UploadScreen.routeName: (context) => const UploadScreen(),
   // BookingCalendarDemoApp.routeName: (context) => BookingCalendarDemoApp(),
 };

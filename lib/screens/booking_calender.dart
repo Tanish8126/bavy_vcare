@@ -50,16 +50,17 @@ class _BookingPageState extends State<BookingPage> {
       vaccineName: "vaccine",
       serviceDuration: _currentHours * 15,
     );
-    print(widget.mobile);
-    print(widget.address);
-    print(widget.name);
-    print(uid);
+    // print(widget.mobile);
+    //print(widget.address);
+    //print(widget.name);
+    //print(uid);
 
     await Future.delayed(const Duration(seconds: 5));
-    await bookings
-        .add(uploadedBooking.toJson())
-        .catchError((error) => print("failed booking: $error"));
-    print('${uploadedBooking.toJson()} has been uploaded');
+    await bookings.add(uploadedBooking.toJson());
+
+    //.catchError((error) =>
+    // print("failed booking: $error")
+    //print('${uploadedBooking.toJson()} has been uploaded');
   }
 
   @override

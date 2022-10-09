@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_const
+// ignore_for_file: unnecessary_const, library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
 
@@ -6,6 +6,8 @@ import '../../../../utils/dafault_button2.dart';
 import '../../login_check.dart';
 
 class Body extends StatefulWidget {
+  const Body({super.key});
+
   @override
   _BodyState createState() => _BodyState();
 }

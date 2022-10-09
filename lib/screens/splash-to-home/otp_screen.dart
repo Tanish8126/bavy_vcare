@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:babyv_care/screens/home/homescreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -112,7 +114,7 @@ class _OtpScreenState extends State<OtpScreen> {
           });
         },
         verificationFailed: (FirebaseAuthException e) {
-          print(e.message);
+          //  print(e.message);
         },
         codeSent: (String? verficationID, int? resendToken) {
           setState(() {

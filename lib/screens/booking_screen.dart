@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -30,6 +32,7 @@ class AppointmentBooking {
       fromJson: AppUtil.timeStampToDateTime,
       toJson: AppUtil.dateTimeToTimeStamp)
   final DateTime? bookingStart;
+
   @JsonKey(
       fromJson: AppUtil.timeStampToDateTime,
       toJson: AppUtil.dateTimeToTimeStamp)
@@ -79,6 +82,9 @@ class AppointmentBooking {
 }
 
 class _BookingScreenState extends State<BookingScreen> {
+  final Stream<QuerySnapshot> appointmentList =
+      FirebaseFirestore.instance.collection('bookings').snapshots();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,18 +93,29 @@ class _BookingScreenState extends State<BookingScreen> {
           "Upcoming Bookings",
         ),
       ),
-      body: Container(
-        child: Column(
-          children: [
-            // Text(userName),
-            // Text("name"),
-            // Text("name"),
-            // Text("name"),
-            // Text("name"),
-            // Text("name"),
-          ],
-        ),
-      ),
+      body: StreamBuilder<QuerySnapshot>(
+          stream: appointmentList,
+          builder: ((context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            final List bookingdata = [];
+            snapshot.data!.docs.map((DocumentSnapshot document) {
+              Map bookdata = document.data() as Map<String, dynamic>;
+              bookingdata.add(bookdata);
+              // print(bookingdata);
+            }).toList();
+            return ListView.builder(
+              itemCount: bookingdata.length,
+              itemBuilder: (context, index) {
+                DocumentSnapshot document = snapshot.data!.docs[index];
+                return SingleChildScrollView(
+                    child: Column(children: [Text(document["name"])]));
+              },
+            );
+          })),
       bottomNavigationBar:
           const CustomBottomNavBar(selectedMenu: MenuState.bookings),
     );
