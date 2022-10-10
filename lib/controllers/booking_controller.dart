@@ -9,7 +9,9 @@ CollectionReference bookings =
 
 CollectionReference<SportBooking> getBookingStream({required String placeId}) {
   return bookings.withConverter<SportBooking>(
-    fromFirestore: (snapshots, _) => SportBooking.fromJson(snapshots.data()!),
+    fromFirestore: (snapshots, _) {
+      return SportBooking.fromJson(snapshots.data()!);
+    },
     toFirestore: (snapshots, _) => snapshots.toJson(),
   );
 }

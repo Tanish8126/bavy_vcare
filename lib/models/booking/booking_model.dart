@@ -16,7 +16,6 @@ List<DateTimeRange> convertStreamResultFirebase(
 
 @JsonSerializable(explicitToJson: true)
 class SportBooking {
-  /// The generated code assumes these values exist in JSON.
   final String? userId;
   final String? userName;
   final String? doctorName;
@@ -54,8 +53,6 @@ class SportBooking {
     this.serviceDuration,
   });
 
-  /// Connect the generated [_$SportBookingFromJson] function to the `fromJson`
-  /// factory.
   factory SportBooking.fromJson(Map<String, dynamic> json) => SportBooking(
         email: json['email'] as String?,
         phoneNumber: json['phoneNumber'] as String?,
@@ -76,7 +73,6 @@ class SportBooking {
 
   get minutes => serviceDuration;
 
-  /// Connect the generated [_$SportBookingToJson] function to the `toJson` method.
   Map<String, dynamic> toJson() => {
         'email': email,
         'phoneNumber': phoneNumber,

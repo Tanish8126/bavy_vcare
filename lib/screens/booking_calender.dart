@@ -16,9 +16,10 @@ class BookingPage extends StatefulWidget {
   String relationship;
   String doctorName;
   String babyGender;
+  String email;
 
   BookingPage(this.name, this.mobile, this.address, this.babyGender,
-      this.babyName, this.doctorName, this.relationship,
+      this.babyName, this.doctorName, this.relationship, this.email,
       {Key? key})
       : super(key: key);
 
@@ -32,12 +33,12 @@ class _BookingPageState extends State<BookingPage> {
   final now = DateTime.now();
   late BookingService myBookingService;
 
-  final String uid = Auth().uid;
+  final uid = FirebaseAuth.instance.currentUser!.uid;
 
   Future<dynamic> uploadBookingMock(
       {required BookingService newBooking}) async {
     final uploadedBooking = SportBooking(
-      email: 'email',
+      email: widget.email,
       phoneNumber: widget.mobile,
       userAddress: widget.address,
       bookingStart: newBooking.bookingStart,
@@ -53,20 +54,18 @@ class _BookingPageState extends State<BookingPage> {
     // print(widget.mobile);
     //print(widget.address);
     //print(widget.name);
-    //print(uid);
+    // print('UserId: ${uid}');
 
-    await Future.delayed(const Duration(seconds: 5));
+    await Future.delayed(const Duration(seconds: 2));
     await bookings.add(uploadedBooking.toJson());
-
-    //.catchError((error) =>
-    // print("failed booking: $error")
-    //print('${uploadedBooking.toJson()} has been uploaded');
+    // print('${uploadedBooking.toJson()} has been uploaded');
   }
 
   @override
   void initState() {
     super.initState();
     initializeDateFormatting;
+    uid;
 
     myBookingService = BookingService(
         serviceName: 'widget.facilityname',

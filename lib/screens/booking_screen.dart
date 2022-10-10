@@ -1,6 +1,8 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:babyv_care/utils/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -49,75 +51,94 @@ class AppointmentBooking {
     this.serviceDuration,
   });
 
-  factory AppointmentBooking.fromJson(Map<String, dynamic> json) =>
-      AppointmentBooking(
-        email: json['email'] as String?,
-        phoneNumber: json['phoneNumber'] as String?,
-        userAddress: json['userAddress'] as String?,
-        bookingStart:
-            AppUtil.timeStampToDateTime(json['bookingStart'] as Timestamp),
-        bookingEnd:
-            AppUtil.timeStampToDateTime(json['bookingEnd'] as Timestamp),
-        doctorId: json['doctorId'] as String?,
-        userId: json['userId'] as String?,
-        userName: json['userName'] as String?,
-        vaccineName: json['vaccineName'] as String?,
-        serviceDuration: json['serviceDuration'] as int?,
-      );
+  factory AppointmentBooking.fromJson(Map<String, dynamic> json) {
+    return AppointmentBooking(
+      email: json['email'] as String?,
+      phoneNumber: json['phoneNumber'] as String?,
+      userAddress: json['userAddress'] as String?,
+      bookingStart:
+          AppUtil.timeStampToDateTime(json['bookingStart'] as Timestamp),
+      bookingEnd: AppUtil.timeStampToDateTime(json['bookingEnd'] as Timestamp),
+      doctorId: json['doctorId'] as String?,
+      userId: json['userId'] as String?,
+      userName: json['userName'] as String?,
+      vaccineName: json['vaccineName'] as String?,
+      serviceDuration: json['serviceDuration'] as int?,
+    );
+  }
 
   get minutes => serviceDuration;
-
-  // Map<String, dynamic> toJson() => {
-  //       'email': email,
-  //       'phoneNumber': phoneNumber,
-  //       'placeAddress': userAddress,
-  //       'bookingStart': bookingStart,
-  //       'bookingEnd': bookingStart!.add(Duration(minutes: minutes)),
-  //       'placeId': doctorId,
-  //       'userId': userId,
-  //       'userName': userName,
-  //       'vaccineName': vaccineName,
-  //       'serviceDuration': serviceDuration,
-  //     };
 }
 
 class _BookingScreenState extends State<BookingScreen> {
+  final uid = FirebaseAuth.instance.currentUser!.uid;
+
   final Stream<QuerySnapshot> appointmentList =
       FirebaseFirestore.instance.collection('bookings').snapshots();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Upcoming Bookings",
-        ),
-      ),
-      body: StreamBuilder<QuerySnapshot>(
-          stream: appointmentList,
-          builder: ((context, AsyncSnapshot<QuerySnapshot> snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-            final List bookingdata = [];
-            snapshot.data!.docs.map((DocumentSnapshot document) {
-              Map bookdata = document.data() as Map<String, dynamic>;
-              bookingdata.add(bookdata);
-              // print(bookingdata);
-            }).toList();
-            return ListView.builder(
-              itemCount: bookingdata.length,
-              itemBuilder: (context, index) {
-                DocumentSnapshot document = snapshot.data!.docs[index];
-                return SingleChildScrollView(
-                    child: Column(children: [Text(document["name"])]));
-              },
-            );
-          })),
-      bottomNavigationBar:
-          const CustomBottomNavBar(selectedMenu: MenuState.bookings),
+    return StreamBuilder<QuerySnapshot>(
+      stream: appointmentList,
+      builder: ((context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        final List bookingdata = [];
+        snapshot.data!.docs.map((DocumentSnapshot document) {
+          Map bookdata = document.data() as Map<String, dynamic>;
+          bookingdata.add(bookdata);
+          //print(bookingdata);
+        }).toList();
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text(
+              "Upcoming Bookings",
+            ),
+          ),
+          body: Column(
+            children: [
+              Flexible(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: bookingdata.length,
+                  itemBuilder: (context, index) {
+                    DocumentSnapshot document = snapshot.data!.docs[index];
+                    return Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: kTextColor2),
+                        child: Column(
+                          children: [
+                            Text(
+                              'Parent Name: ${document["userName"]}',
+                            ),
+                            Text('Baby Name: ${document["babyName"]}'),
+                            Text('Mobile Number: ${document["phoneNumber"]}'),
+                            Text('Email Id: ${document["email"]}'),
+                            Text('Gender: ${document["babyGender"]}'),
+                            Text(
+                                'Booking Start: ${AppUtil.timeStampToDateTime(document["bookingStart"])}'),
+                            Text(
+                                'Booking End: ${AppUtil.timeStampToDateTime(document["bookingEnd"])}'),
+                            Text('Doctor Name: ${document["doctorName"]}'),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+          bottomNavigationBar:
+              const CustomBottomNavBar(selectedMenu: MenuState.bookings),
+        );
+      }),
     );
   }
 }
