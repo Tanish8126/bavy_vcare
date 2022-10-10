@@ -1,5 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'package:babyv_care/screens/past_booking_screen.dart';
 import 'package:babyv_care/utils/default_form_field.dart';
 import 'package:flutter/material.dart';
 
@@ -185,7 +186,9 @@ class _HomeScreenFormState extends State<HomeScreenForm> {
                   SizedBox(height: SizeConfig.screenHeight * 0.025),
                   DefaultButton(
                     text: "Upload Document",
-                    press: () {},
+                    press: () {
+                      Navigator.pushNamed(context, PastBookingScreen.routeName);
+                    },
                   ),
                 ],
               ),

@@ -23,7 +23,7 @@ class _MessageScreenState extends State<MessageScreen> {
       ),
       body: Padding(
         padding: EdgeInsets.all(getProportionateScreenWidth(12)),
-        child: Text("Coming Soon",
+        child: const Text("Coming Soon",
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
       ),
       bottomNavigationBar:

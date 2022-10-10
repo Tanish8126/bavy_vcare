@@ -12,6 +12,7 @@ class AppointmentBanner extends StatelessWidget {
   final Stream<QuerySnapshot> appointmentList = FirebaseFirestore.instance
       .collection('bookings')
       .where('userId', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+      .limit(1)
       .snapshots();
   AppointmentBanner({
     Key? key,
@@ -28,7 +29,7 @@ class AppointmentBanner extends StatelessWidget {
           );
         }
         final List bookingdata1 = [];
-        snapshot.data!.docs.map((DocumentSnapshot document) {
+        snapshot.data?.docs.map((DocumentSnapshot document) {
           Map bookdata1 = document.data() as Map<String, dynamic>;
           bookingdata1.add(bookdata1);
         }).toList();
@@ -66,7 +67,7 @@ class AppointmentBanner extends StatelessWidget {
                         return Text(
                           'Booking On: ${DateFormat('dd-MM-yyyy - h:mm a').format(document["bookingStart"].toDate())}',
                           style: TextStyle(
-                            fontSize: getProportionateScreenWidth(30),
+                            fontSize: getProportionateScreenWidth(26),
                             fontWeight: FontWeight.normal,
                             color: Colors.white,
                           ),

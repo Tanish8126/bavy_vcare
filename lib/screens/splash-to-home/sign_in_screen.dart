@@ -62,7 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         prefix: Padding(
                           padding:
                               EdgeInsets.all(getProportionateScreenWidth(4)),
-                          child: Text(
+                          child: const Text(
                             '+91',
                             style: TextStyle(color: kBlack),
                           ),

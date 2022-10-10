@@ -29,7 +29,6 @@ class BookingPage extends StatefulWidget {
 
 class _BookingPageState extends State<BookingPage> {
   final int _currentHours = 1;
-  int totalAmount = 100;
   final now = DateTime.now();
   late BookingService myBookingService;
 
@@ -51,14 +50,9 @@ class _BookingPageState extends State<BookingPage> {
       vaccineName: "vaccine",
       serviceDuration: _currentHours * 15,
     );
-    // print(widget.mobile);
-    //print(widget.address);
-    //print(widget.name);
-    // print('UserId: ${uid}');
 
     await Future.delayed(const Duration(seconds: 2));
     await bookings.add(uploadedBooking.toJson());
-    // print('${uploadedBooking.toJson()} has been uploaded');
   }
 
   @override
@@ -119,6 +113,7 @@ class _BookingPageState extends State<BookingPage> {
           hideBreakTime: false,
           loadingWidget: const Text('Fetching data...'),
           locale: 'en_US',
+
           startingDayOfWeek: StartingDayOfWeek.monday,
           disabledDays: const [7],
         ),

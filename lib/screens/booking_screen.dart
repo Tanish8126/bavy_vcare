@@ -25,6 +25,8 @@ class _BookingScreenState extends State<BookingScreen> {
   final Stream<QuerySnapshot> appointmentList = FirebaseFirestore.instance
       .collection('bookings')
       .where('userId', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+      //.where("bookingStart",
+      //  isGreaterThan: DateTime.now().millisecondsSinceEpoch)
       .snapshots();
 
   @override
@@ -37,14 +39,12 @@ class _BookingScreenState extends State<BookingScreen> {
             child: CircularProgressIndicator(),
           );
         }
-        final List bookingdata1 = [];
-        final List bookingdata2 = [];
-        snapshot.data!.docs.map((DocumentSnapshot document) {
-          Map bookdata1 = document.data() as Map<String, dynamic>;
-          bookingdata1.add(bookdata1);
-          Map bookdata2 = document.data() as Map<String, dynamic>;
-          bookingdata2.add(bookdata2);
-          //print(bookingdata);
+        final List bookingdatanew = [];
+
+        snapshot.data?.docs.map((DocumentSnapshot document) {
+          Map bookdata = document.data() as Map<String, dynamic>;
+          bookingdatanew.add(bookdata);
+          print(bookingdatanew);
         }).toList();
         return Scaffold(
           appBar: AppBar(
@@ -54,10 +54,23 @@ class _BookingScreenState extends State<BookingScreen> {
           ),
           body: Column(
             children: [
+              SizedBox(height: SizeConfig.screenHeight * 0.015),
+              const Text(
+                'Upcoming Booking',
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: kPrimaryLightColor),
+              ),
+              const Divider(
+                height: 15,
+                thickness: 2,
+                color: Colors.black45,
+              ),
               Flexible(
                 child: ListView.builder(
                   shrinkWrap: true,
-                  itemCount: bookingdata1.length,
+                  itemCount: bookingdatanew.length,
                   itemBuilder: (context, index) {
                     DocumentSnapshot document = snapshot.data!.docs[index];
                     return Padding(
@@ -96,57 +109,13 @@ class _BookingScreenState extends State<BookingScreen> {
                               ],
                             ),
                           ),
-                          SizedBox(height: SizeConfig.screenHeight * 0.02),
-                          const Text(
-                            'Upcoming Booking',
-                            style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: kPrimaryLightColor),
-                          ),
-                          const Divider(
-                            height: 15,
-                            thickness: 2,
-                            color: Colors.black45,
-                          ),
-                          Container(
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: kTextColor2),
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                    height: SizeConfig.screenHeight * 0.015),
-                                buildOption(
-                                  context,
-                                  'Parent Name: ${document["userName"]}',
-                                ),
-                                buildOption(context,
-                                    'Baby Name: ${document["babyName"]}'),
-                                buildOption(context,
-                                    'Mobile Number: ${document["phoneNumber"]}'),
-                                buildOption(
-                                    context, 'Email Id: ${document["email"]}'),
-                                buildOption(context,
-                                    'Gender: ${document["babyGender"]}'),
-                                buildOption(context,
-                                    'Booking Start: ${DateFormat('yyyy-MM-dd : h:mm a').format(document["bookingStart"].toDate())}'),
-                                buildOption(context,
-                                    'Booking End: ${DateFormat('yyyy-MM-dd : h:mm a').format(document["bookingEnd"].toDate())}'),
-                                buildOption(context,
-                                    'Doctor Name: ${document["doctorName"]}'),
-                                SizedBox(
-                                    height: SizeConfig.screenHeight * 0.015),
-                              ],
-                            ),
-                          ),
                         ],
                       ),
                     );
                   },
                 ),
               ),
+              SizedBox(height: SizeConfig.screenHeight * 0.03),
             ],
           ),
           bottomNavigationBar:
@@ -155,27 +124,26 @@ class _BookingScreenState extends State<BookingScreen> {
       }),
     );
   }
+}
 
-  buildOption(
-    BuildContext context,
-    String title,
-  ) {
-    return Padding(
-      padding:
-          EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(12)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-              color: kBlack,
-            ),
+buildOption(
+  BuildContext context,
+  String title,
+) {
+  return Padding(
+    padding: EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(12)),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          title,
+          style: const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+            color: kBlack,
           ),
-        ],
-      ),
-    );
-  }
+        ),
+      ],
+    ),
+  );
 }
