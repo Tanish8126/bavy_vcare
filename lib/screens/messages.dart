@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../utils/enums.dart';
 import '../utils/custtom_bottom_nav_bar.dart';
+import '../utils/size_config.dart';
 
 class MessageScreen extends StatefulWidget {
   static String routeName = '/messageing';
@@ -20,8 +21,8 @@ class _MessageScreenState extends State<MessageScreen> {
           "Chat with Doctors",
         ),
       ),
-      body: const Padding(
-        padding: EdgeInsets.all(20),
+      body: Padding(
+        padding: EdgeInsets.all(getProportionateScreenWidth(12)),
         child: Text("Coming Soon",
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
       ),

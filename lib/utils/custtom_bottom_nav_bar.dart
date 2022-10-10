@@ -1,4 +1,5 @@
 import 'package:babyv_care/screens/home/homescreen.dart';
+import 'package:babyv_care/utils/size_config.dart';
 import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_svg/flutter_svg.dart';
@@ -21,7 +22,7 @@ class CustomBottomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     const Color inActiveIconColor = kPrimaryLightColor;
     return Container(
-      padding: const EdgeInsets.only(bottom: 10, top: 0),
+      padding: EdgeInsets.only(bottom: getProportionateScreenWidth(12)),
       alignment: Alignment.center,
       height: 60,
       decoration: const BoxDecoration(

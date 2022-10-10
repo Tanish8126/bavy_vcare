@@ -9,6 +9,7 @@ import '../../controllers/appointment_controller.dart';
 import '../../utils/constants.dart';
 import '../../utils/dafault_button.dart';
 import '../../utils/default_text_field.dart';
+import '../../utils/size_config.dart';
 
 class AppointmentForm extends StatefulWidget {
   static String routeName = "/appointmentform";
@@ -106,7 +107,8 @@ class _AppointmentFormState extends State<AppointmentForm> {
                   key: _formKey,
                   child: SingleChildScrollView(
                     child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding:
+                            EdgeInsets.all(getProportionateScreenWidth(12)),
                         child: Column(children: [
                           Container(
                             width: double.infinity,
@@ -115,6 +117,8 @@ class _AppointmentFormState extends State<AppointmentForm> {
                                 color: kTextColor2),
                             child: Column(
                               children: [
+                                SizedBox(
+                                    height: SizeConfig.screenHeight * 0.015),
                                 const Text("Selected Age",
                                     style: TextStyle(
                                         color: kBlack,
@@ -125,9 +129,8 @@ class _AppointmentFormState extends State<AppointmentForm> {
                                         color: kBlack,
                                         fontSize: 16,
                                         fontWeight: FontWeight.normal)),
-                                const SizedBox(
-                                  height: 10,
-                                ),
+                                SizedBox(
+                                    height: SizeConfig.screenHeight * 0.010),
                                 const Text("Selected Vaccine",
                                     style: TextStyle(
                                         color: kBlack,
@@ -138,22 +141,24 @@ class _AppointmentFormState extends State<AppointmentForm> {
                                         color: kBlack,
                                         fontSize: 16,
                                         fontWeight: FontWeight.normal)),
+                                SizedBox(
+                                    height: SizeConfig.screenHeight * 0.015),
                               ],
                             ),
                           ),
                           Container(
                             child: Column(
                               children: [
-                                const SizedBox(
-                                  height: 10,
-                                ),
+                                SizedBox(
+                                    height: SizeConfig.screenHeight * 0.015),
                                 const Text(
                                   "Fill Out Details",
                                   style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold),
                                 ),
-                                const SizedBox(height: 30),
+                                SizedBox(
+                                    height: SizeConfig.screenHeight * 0.025),
                                 DefaultField(
                                   controller: nameController,
                                   keyboardtype: TextInputType.name,
@@ -167,7 +172,8 @@ class _AppointmentFormState extends State<AppointmentForm> {
                                   labeltext: "Parent Name",
                                   hinttext: "Enter Your Full Name",
                                 ),
-                                const SizedBox(height: 30),
+                                SizedBox(
+                                    height: SizeConfig.screenHeight * 0.025),
                                 DefaultField(
                                   controller: babynameController,
                                   keyboardtype: TextInputType.name,
@@ -181,7 +187,8 @@ class _AppointmentFormState extends State<AppointmentForm> {
                                   hinttext: "Enter Baby Full Name",
                                   labeltext: "Baby Name",
                                 ),
-                                const SizedBox(height: 30),
+                                SizedBox(
+                                    height: SizeConfig.screenHeight * 0.025),
                                 TextField(
                                     controller: dobController,
                                     enableInteractiveSelection: false,
@@ -213,9 +220,8 @@ class _AppointmentFormState extends State<AppointmentForm> {
                                     ),
                                   ),
                                 ),
-                                const SizedBox(
-                                  height: 30,
-                                ),
+                                SizedBox(
+                                    height: SizeConfig.screenHeight * 0.035),
                                 DefaultField(
                                   controller: mobileController,
                                   keyboardtype: TextInputType.phone,
@@ -227,15 +233,15 @@ class _AppointmentFormState extends State<AppointmentForm> {
                                     return null;
                                   },
                                   hinttext: "Enter Mobile Number",
-                                  prefix: const Padding(
-                                    padding: EdgeInsets.all(4),
+                                  prefix: Padding(
+                                    padding: EdgeInsets.all(
+                                        getProportionateScreenWidth(4)),
                                     child: Text('+91'),
                                   ),
                                   labeltext: "Mobile Number",
                                 ),
-                                const SizedBox(
-                                  height: 30,
-                                ),
+                                SizedBox(
+                                    height: SizeConfig.screenHeight * 0.025),
                                 DefaultField(
                                   controller: emailController,
                                   keyboardtype: TextInputType.emailAddress,
@@ -250,9 +256,8 @@ class _AppointmentFormState extends State<AppointmentForm> {
                                   prefix: null,
                                   labeltext: "Email Id",
                                 ),
-                                const SizedBox(
-                                  height: 30,
-                                ),
+                                SizedBox(
+                                    height: SizeConfig.screenHeight * 0.025),
                                 TextFormField(
                                   keyboardType: TextInputType.streetAddress,
                                   style: const TextStyle(
@@ -280,7 +285,8 @@ class _AppointmentFormState extends State<AppointmentForm> {
                                           fontSize: 24,
                                           fontWeight: FontWeight.bold)),
                                 ),
-                                const SizedBox(height: 30),
+                                SizedBox(
+                                    height: SizeConfig.screenHeight * 0.025),
                                 DefaultFormField(
                                   items: genders.map<DropdownMenuItem<String>>(
                                       (String value) {
@@ -299,9 +305,8 @@ class _AppointmentFormState extends State<AppointmentForm> {
                                     });
                                   },
                                 ),
-                                const SizedBox(
-                                  height: 40,
-                                ),
+                                SizedBox(
+                                    height: SizeConfig.screenHeight * 0.03),
                                 DefaultFormField(
                                   items: relations
                                       .map<DropdownMenuItem<String>>(
@@ -321,12 +326,14 @@ class _AppointmentFormState extends State<AppointmentForm> {
                                     });
                                   },
                                 ),
-                                const SizedBox(height: 30),
+                                SizedBox(
+                                    height: SizeConfig.screenHeight * 0.025),
                                 Container(
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
                                       color: kTextColor2),
-                                  padding: const EdgeInsets.all(15),
+                                  padding: EdgeInsets.all(
+                                      getProportionateScreenWidth(15)),
                                   child: Column(
                                     children: [
                                       const Text(
@@ -336,7 +343,9 @@ class _AppointmentFormState extends State<AppointmentForm> {
                                             color: kBlack,
                                             fontWeight: FontWeight.bold),
                                       ),
-                                      const SizedBox(height: 20),
+                                      SizedBox(
+                                          height:
+                                              SizeConfig.screenHeight * 0.025),
                                       DefaultFormField(
                                         items: snapshot.data!.docs.map((value) {
                                           return DropdownMenuItem(
@@ -364,11 +373,14 @@ class _AppointmentFormState extends State<AppointmentForm> {
                                           );
                                         },
                                       ),
-                                      const SizedBox(height: 20),
+                                      SizedBox(
+                                          height:
+                                              SizeConfig.screenHeight * 0.012),
                                     ],
                                   ),
                                 ),
-                                const SizedBox(height: 20),
+                                SizedBox(
+                                    height: SizeConfig.screenHeight * 0.012),
                                 DefaultButton(
                                   text: "Choose Your Slot",
                                   press: () {

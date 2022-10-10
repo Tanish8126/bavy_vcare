@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../utils/dafault_button2.dart';
+import '../../../../utils/size_config.dart';
 import '../../login_check.dart';
 
 class Body extends StatefulWidget {
@@ -19,16 +20,17 @@ class _BodyState extends State<Body> {
       child: SizedBox(
         width: double.infinity,
         child: Padding(
-          padding: const EdgeInsets.only(top: 50, left: 10, right: 10),
+          padding: EdgeInsets.only(
+              top: getProportionateScreenWidth(50),
+              left: getProportionateScreenWidth(10),
+              right: getProportionateScreenWidth(10)),
           child: Column(
             children: <Widget>[
               Image.asset(
                 'assets/images/babyvcare.png',
                 width: 200,
               ),
-              const SizedBox(
-                height: 50,
-              ),
+              SizedBox(height: SizeConfig.screenHeight * 0.05),
               const Text(
                 "Welcome to India's First Baby Vaccination app!",
                 style: const TextStyle(

@@ -37,10 +37,11 @@ class _LoginScreenState extends State<LoginScreen> {
               color: kbg,
               elevation: 10,
               child: SizedBox(
-                height: 300,
+                height: getProportionateScreenHeight(300),
                 width: double.infinity,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: getProportionateScreenWidth(15)),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -58,8 +59,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         hinttext: "Enter your Mobile Number",
                         maxlength: 10,
                         controller: _controller,
-                        prefix: const Padding(
-                          padding: EdgeInsets.all(4),
+                        prefix: Padding(
+                          padding:
+                              EdgeInsets.all(getProportionateScreenWidth(4)),
                           child: Text(
                             '+91',
                             style: TextStyle(color: kBlack),
@@ -78,11 +80,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 30,
-            ),
+            SizedBox(height: SizeConfig.screenHeight * 0.035),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
+              padding: EdgeInsets.symmetric(
+                  horizontal: getProportionateScreenWidth(10)),
               child: DefaultButton(
                   text: "GET OTP",
                   press: () {

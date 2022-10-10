@@ -19,9 +19,7 @@ final Map<String, WidgetBuilder> routes = {
   HomeScreen.routeName: (context) => const HomeScreen(),
   SplashScreen.routeName: (context) => const SplashScreen(),
   SettingsScreen.routeName: (context) => const SettingsScreen(),
-  BookingScreen.routeName: (context) => BookingScreen(
-        bookingData: const [],
-      ),
+  BookingScreen.routeName: (context) => BookingScreen(),
   MessageScreen.routeName: (context) => const MessageScreen(),
   HomeScreenForm.routeName: (context) => const HomeScreenForm(),
   // AppointmentForm.routeName: (context) => AppointmentForm(),

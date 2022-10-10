@@ -4,77 +4,28 @@ import 'package:babyv_care/utils/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:json_annotation/json_annotation.dart';
+import 'package:intl/intl.dart';
 
-import '../models/booking/booking_model.dart';
 import '../utils/enums.dart';
 import '../utils/custtom_bottom_nav_bar.dart';
+import '../utils/size_config.dart';
 
 class BookingScreen extends StatefulWidget {
   static String routeName = '/bookings';
-  List<AppointmentBooking> bookingData;
-  BookingScreen({Key? key, required this.bookingData}) : super(key: key);
+
+  BookingScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<BookingScreen> createState() => _BookingScreenState();
 }
 
-class AppointmentBooking {
-  final String? userId;
-  final String? userName;
-  final String? doctorId;
-  final String? vaccineName;
-  final String? email;
-  final String? phoneNumber;
-  final String? userAddress;
-  final int? serviceDuration;
-  final DateTime? bookingEnd;
-
-  @JsonKey(
-      fromJson: AppUtil.timeStampToDateTime,
-      toJson: AppUtil.dateTimeToTimeStamp)
-  final DateTime? bookingStart;
-
-  @JsonKey(
-      fromJson: AppUtil.timeStampToDateTime,
-      toJson: AppUtil.dateTimeToTimeStamp)
-  AppointmentBooking({
-    this.email,
-    this.phoneNumber,
-    this.userAddress,
-    this.bookingStart,
-    this.bookingEnd,
-    this.doctorId,
-    this.userId,
-    this.userName,
-    this.vaccineName,
-    this.serviceDuration,
-  });
-
-  factory AppointmentBooking.fromJson(Map<String, dynamic> json) {
-    return AppointmentBooking(
-      email: json['email'] as String?,
-      phoneNumber: json['phoneNumber'] as String?,
-      userAddress: json['userAddress'] as String?,
-      bookingStart:
-          AppUtil.timeStampToDateTime(json['bookingStart'] as Timestamp),
-      bookingEnd: AppUtil.timeStampToDateTime(json['bookingEnd'] as Timestamp),
-      doctorId: json['doctorId'] as String?,
-      userId: json['userId'] as String?,
-      userName: json['userName'] as String?,
-      vaccineName: json['vaccineName'] as String?,
-      serviceDuration: json['serviceDuration'] as int?,
-    );
-  }
-
-  get minutes => serviceDuration;
-}
-
 class _BookingScreenState extends State<BookingScreen> {
-  final uid = FirebaseAuth.instance.currentUser!.uid;
-
-  final Stream<QuerySnapshot> appointmentList =
-      FirebaseFirestore.instance.collection('bookings').snapshots();
+  final Stream<QuerySnapshot> appointmentList = FirebaseFirestore.instance
+      .collection('bookings')
+      .where('userId', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+      .snapshots();
 
   @override
   Widget build(BuildContext context) {
@@ -86,10 +37,13 @@ class _BookingScreenState extends State<BookingScreen> {
             child: CircularProgressIndicator(),
           );
         }
-        final List bookingdata = [];
+        final List bookingdata1 = [];
+        final List bookingdata2 = [];
         snapshot.data!.docs.map((DocumentSnapshot document) {
-          Map bookdata = document.data() as Map<String, dynamic>;
-          bookingdata.add(bookdata);
+          Map bookdata1 = document.data() as Map<String, dynamic>;
+          bookingdata1.add(bookdata1);
+          Map bookdata2 = document.data() as Map<String, dynamic>;
+          bookingdata2.add(bookdata2);
           //print(bookingdata);
         }).toList();
         return Scaffold(
@@ -103,31 +57,91 @@ class _BookingScreenState extends State<BookingScreen> {
               Flexible(
                 child: ListView.builder(
                   shrinkWrap: true,
-                  itemCount: bookingdata.length,
+                  itemCount: bookingdata1.length,
                   itemBuilder: (context, index) {
                     DocumentSnapshot document = snapshot.data!.docs[index];
                     return Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: kTextColor2),
-                        child: Column(
-                          children: [
-                            Text(
-                              'Parent Name: ${document["userName"]}',
+                      padding: EdgeInsets.all(getProportionateScreenWidth(12)),
+                      child: Column(
+                        children: [
+                          Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: kTextColor2),
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                    height: SizeConfig.screenHeight * 0.015),
+                                buildOption(
+                                  context,
+                                  'Parent Name: ${document["userName"]}',
+                                ),
+                                buildOption(context,
+                                    'Baby Name: ${document["babyName"]}'),
+                                buildOption(context,
+                                    'Mobile Number: ${document["phoneNumber"]}'),
+                                buildOption(
+                                    context, 'Email Id: ${document["email"]}'),
+                                buildOption(context,
+                                    'Gender: ${document["babyGender"]}'),
+                                buildOption(context,
+                                    'Booking Start: ${DateFormat('dd-MM-yyyy : h:mm a').format(document["bookingStart"].toDate())}'),
+                                buildOption(context,
+                                    'Booking End: ${DateFormat('yyyy-MM-dd : h:mm a').format(document["bookingEnd"].toDate())}'),
+                                buildOption(context,
+                                    'Doctor Name: ${document["doctorName"]}'),
+                                SizedBox(
+                                    height: SizeConfig.screenHeight * 0.015),
+                              ],
                             ),
-                            Text('Baby Name: ${document["babyName"]}'),
-                            Text('Mobile Number: ${document["phoneNumber"]}'),
-                            Text('Email Id: ${document["email"]}'),
-                            Text('Gender: ${document["babyGender"]}'),
-                            Text(
-                                'Booking Start: ${AppUtil.timeStampToDateTime(document["bookingStart"])}'),
-                            Text(
-                                'Booking End: ${AppUtil.timeStampToDateTime(document["bookingEnd"])}'),
-                            Text('Doctor Name: ${document["doctorName"]}'),
-                          ],
-                        ),
+                          ),
+                          SizedBox(height: SizeConfig.screenHeight * 0.02),
+                          const Text(
+                            'Upcoming Booking',
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: kPrimaryLightColor),
+                          ),
+                          const Divider(
+                            height: 15,
+                            thickness: 2,
+                            color: Colors.black45,
+                          ),
+                          Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: kTextColor2),
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                    height: SizeConfig.screenHeight * 0.015),
+                                buildOption(
+                                  context,
+                                  'Parent Name: ${document["userName"]}',
+                                ),
+                                buildOption(context,
+                                    'Baby Name: ${document["babyName"]}'),
+                                buildOption(context,
+                                    'Mobile Number: ${document["phoneNumber"]}'),
+                                buildOption(
+                                    context, 'Email Id: ${document["email"]}'),
+                                buildOption(context,
+                                    'Gender: ${document["babyGender"]}'),
+                                buildOption(context,
+                                    'Booking Start: ${DateFormat('yyyy-MM-dd : h:mm a').format(document["bookingStart"].toDate())}'),
+                                buildOption(context,
+                                    'Booking End: ${DateFormat('yyyy-MM-dd : h:mm a').format(document["bookingEnd"].toDate())}'),
+                                buildOption(context,
+                                    'Doctor Name: ${document["doctorName"]}'),
+                                SizedBox(
+                                    height: SizeConfig.screenHeight * 0.015),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     );
                   },
@@ -139,6 +153,29 @@ class _BookingScreenState extends State<BookingScreen> {
               const CustomBottomNavBar(selectedMenu: MenuState.bookings),
         );
       }),
+    );
+  }
+
+  buildOption(
+    BuildContext context,
+    String title,
+  ) {
+    return Padding(
+      padding:
+          EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(12)),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+              color: kBlack,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

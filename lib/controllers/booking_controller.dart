@@ -16,8 +16,6 @@ CollectionReference<SportBooking> getBookingStream({required String placeId}) {
   );
 }
 
-///How you actually get the stream of data from Firestore with the help of the previous function
-///note that this query filters are for my data structure, you need to adjust it to your solution.
 Stream<dynamic>? getBookingStreamFirebase(
     {required DateTime end, required DateTime start}) {
   return bookings

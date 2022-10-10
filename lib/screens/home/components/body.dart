@@ -3,6 +3,7 @@ import 'package:babyv_care/screens/home/components/homecreen_form.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/constants.dart';
+import '../../../utils/size_config.dart';
 import 'welcome_banner.dart';
 import '../../notificationscreen.dart';
 
@@ -31,7 +32,7 @@ class _BodyState extends State<Body> {
             ),
             actions: <Widget>[
               Padding(
-                padding: const EdgeInsets.all(10),
+                padding: EdgeInsets.all(getProportionateScreenWidth(10)),
                 child: GestureDetector(
                   onTap: () {
                     Navigator.pushNamed(context, NotificationScreen.routeName);
@@ -44,16 +45,16 @@ class _BodyState extends State<Body> {
                 ),
               ),
             ]),
-        body: Column(children: const [
-          WelcomeBanner(),
+        body: Column(children: [
+          const WelcomeBanner(),
           AppointmentBanner(),
-          Text(
+          const Text(
             "Select The Required Vaccine",
             style: TextStyle(
                 color: Colors.black, fontWeight: FontWeight.bold, fontSize: 24),
             textAlign: TextAlign.center,
           ),
-          Expanded(child: HomeScreenForm())
+          const Expanded(child: HomeScreenForm())
         ]));
   }
 }

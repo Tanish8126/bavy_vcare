@@ -7,6 +7,7 @@ import '../../utils/constants.dart';
 import '../../utils/dafault_button.dart';
 import '../../utils/enums.dart';
 import '../../utils/custtom_bottom_nav_bar.dart';
+import '../../utils/size_config.dart';
 import '../splash-to-home/sign_in_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -27,7 +28,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
         title: const Text("Settings"),
       ),
       body: Container(
-        padding: const EdgeInsets.only(left: 16, top: 25, right: 16),
+        padding: EdgeInsets.only(
+            left: getProportionateScreenWidth(16),
+            top: getProportionateScreenWidth(25),
+            right: getProportionateScreenWidth(16)),
         child: ListView(
           shrinkWrap: true,
           children: [
@@ -37,9 +41,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   Icons.person,
                   color: kPrimaryColor,
                 ),
-                const SizedBox(
-                  width: 8,
-                ),
+                SizedBox(width: SizeConfig.screenWidth * 0.03),
                 const Text(
                   "Account",
                   style: const TextStyle(
@@ -47,9 +49,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       fontWeight: FontWeight.bold,
                       color: kPrimaryLightColor),
                 ),
-                const SizedBox(
-                  width: 15,
-                ),
+                SizedBox(width: SizeConfig.screenWidth * 0.03),
                 Text(
                   "$mobile",
                   style: const TextStyle(
@@ -64,17 +64,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
               thickness: 2,
               color: kBlack,
             ),
-            const SizedBox(
-              height: 10,
-            ),
+            SizedBox(height: SizeConfig.screenHeight * 0.012),
             buildAccountOptionRow(context, "Social", "nav"),
             buildAccountOptionRow(context, "Blog", "nav"),
             buildAccountOptionRow(context, "Privacy and security", "nav"),
             buildAccountOptionRow(context, "Share App", "nav"),
             buildAccountOptionRow(context, "Feedback & Review", "nav"),
-            const SizedBox(
-              height: 40,
-            ),
+            SizedBox(height: SizeConfig.screenHeight * 0.04),
             Center(
               child: DefaultButton(
                 press: () async {
@@ -125,7 +121,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             });
       },
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        padding: EdgeInsets.symmetric(vertical: getProportionateScreenWidth(8)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

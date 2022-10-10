@@ -106,13 +106,15 @@ class _HomeScreenFormState extends State<HomeScreenForm> {
       child: Stack(
         children: [
           Container(
-            padding: const EdgeInsets.only(left: 10, right: 10),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 10,
+            ),
             height: SizeConfig.screenHeight * 0.5,
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 30),
+                  SizedBox(height: SizeConfig.screenHeight * 0.035),
                   DefaultFormField(
                     labeltext: "Select Baby's Age",
                     hinttext: "Select Age",
@@ -141,9 +143,7 @@ class _HomeScreenFormState extends State<HomeScreenForm> {
                         value == null ? 'field required' : null,
                     value: _selectedAge,
                   ),
-                  const SizedBox(
-                    height: 30,
-                  ),
+                  SizedBox(height: SizeConfig.screenHeight * 0.035),
                   DefaultFormField(
                     labeltext: "Choose Vaccine",
                     hinttext: " Select Vaccine",
@@ -170,7 +170,7 @@ class _HomeScreenFormState extends State<HomeScreenForm> {
                         value == null ? 'field required' : null,
                     value: _selectedVaccine,
                   ),
-                  const SizedBox(height: 30),
+                  SizedBox(height: SizeConfig.screenHeight * 0.025),
                   DefaultButton(
                     text: "Book an Appointment",
                     press: () {
@@ -182,9 +182,7 @@ class _HomeScreenFormState extends State<HomeScreenForm> {
                               AppointmentForm(_selectedAge, _selectedVaccine)));
                     },
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  SizedBox(height: SizeConfig.screenHeight * 0.025),
                   DefaultButton(
                     text: "Upload Document",
                     press: () {},
