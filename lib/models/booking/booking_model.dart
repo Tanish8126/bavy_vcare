@@ -35,12 +35,16 @@ class SportBooking {
   final DateTime? bookingEnd;
   final String? email;
   final String? phoneNumber;
-  final String? userAddress;
+  final String? userAddress1;
+  final String? userAddress2;
+  final String? userPincode;
 
   SportBooking({
     this.email,
     this.phoneNumber,
-    this.userAddress,
+    this.userAddress1,
+    this.userAddress2,
+    this.userPincode,
     this.bookingStart,
     this.bookingEnd,
     this.doctorName,
@@ -56,7 +60,9 @@ class SportBooking {
   factory SportBooking.fromJson(Map<String, dynamic> json) => SportBooking(
         email: json['email'] as String?,
         phoneNumber: json['phoneNumber'] as String?,
-        userAddress: json['placeAddress'] as String?,
+        userAddress1: json['userAddress'] as String?,
+        userAddress2: json['userAddress2'] as String?,
+        userPincode: json['userPincode'] as String?,
         bookingStart:
             AppUtil.timeStampToDateTime(json['bookingStart'] as Timestamp),
         bookingEnd:
@@ -76,7 +82,9 @@ class SportBooking {
   Map<String, dynamic> toJson() => {
         'email': email,
         'phoneNumber': phoneNumber,
-        'userAddress': userAddress,
+        'userAddress1': userAddress1,
+        'userAddress2': userAddress2,
+        'userPincode': userPincode,
         'bookingStart': bookingStart,
         'bookingEnd': bookingStart!.add(Duration(minutes: minutes)),
         'doctorName': doctorName,

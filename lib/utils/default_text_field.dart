@@ -30,7 +30,7 @@ class DefaultField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       keyboardType: keyboardtype,
-      style: const TextStyle(color: kBlack),
+      style: const TextStyle(color: kBlack, fontWeight: FontWeight.bold),
       controller: controller,
       maxLength: maxlength,
       validator: validate,

@@ -8,7 +8,7 @@ import '../screens/notificationscreen.dart';
 import '../screens/past_booking_screen.dart';
 import '../screens/settings/settings.dart';
 import '../screens/splash-to-home/login_check.dart';
-import '../screens/splash-to-home/sign_in_screen.dart';
+import '../screens/splash-to-home/mobile_screen.dart';
 import '../screens/splash-to-home/splash/splash_screen.dart';
 import '../screens/uploadscreen.dart';
 
@@ -20,7 +20,7 @@ final Map<String, WidgetBuilder> routes = {
   HomeScreen.routeName: (context) => const HomeScreen(),
   SplashScreen.routeName: (context) => const SplashScreen(),
   SettingsScreen.routeName: (context) => const SettingsScreen(),
-  BookingScreen.routeName: (context) => BookingScreen(),
+  BookingScreen.routeName: (context) => const BookingScreen(),
   PastBookingScreen.routeName: (context) => PastBookingScreen(),
   MessageScreen.routeName: (context) => const MessageScreen(),
   HomeScreenForm.routeName: (context) => const HomeScreenForm(),

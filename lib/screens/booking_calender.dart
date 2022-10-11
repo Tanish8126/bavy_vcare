@@ -11,15 +11,26 @@ import '../models/booking/booking_model.dart';
 class BookingPage extends StatefulWidget {
   String name;
   String mobile;
-  String address;
+  String address1;
+  String address2;
+  String pincode;
   String babyName;
   String relationship;
   String doctorName;
   String babyGender;
   String email;
 
-  BookingPage(this.name, this.mobile, this.address, this.babyGender,
-      this.babyName, this.doctorName, this.relationship, this.email,
+  BookingPage(
+      this.name,
+      this.babyName,
+      this.mobile,
+      this.email,
+      this.babyGender,
+      this.relationship,
+      this.address1,
+      this.address2,
+      this.pincode,
+      this.doctorName,
       {Key? key})
       : super(key: key);
 
@@ -39,7 +50,9 @@ class _BookingPageState extends State<BookingPage> {
     final uploadedBooking = SportBooking(
       email: widget.email,
       phoneNumber: widget.mobile,
-      userAddress: widget.address,
+      userAddress1: widget.address1,
+      userAddress2: widget.address2,
+      userPincode: widget.pincode,
       bookingStart: newBooking.bookingStart,
       userId: uid,
       doctorName: widget.doctorName,

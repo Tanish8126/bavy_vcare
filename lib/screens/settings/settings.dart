@@ -8,7 +8,7 @@ import '../../utils/dafault_button.dart';
 import '../../utils/enums.dart';
 import '../../utils/custtom_bottom_nav_bar.dart';
 import '../../utils/size_config.dart';
-import '../splash-to-home/sign_in_screen.dart';
+import '../splash-to-home/mobile_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   static String routeName = "/settingscreen";

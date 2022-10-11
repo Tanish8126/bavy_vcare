@@ -1,7 +1,8 @@
-// ignore_for_file: unnecessary_const, library_private_types_in_public_api
+// ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
 
+import '../../../../utils/constants.dart';
 import '../../../../utils/dafault_button2.dart';
 import '../../../../utils/size_config.dart';
 import '../../login_check.dart';
@@ -33,10 +34,8 @@ class _BodyState extends State<Body> {
               SizedBox(height: SizeConfig.screenHeight * 0.05),
               const Text(
                 "Welcome to India's First Baby Vaccination app!",
-                style: const TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.normal,
-                    fontSize: 20),
+                style: TextStyle(
+                    color: kBlack, fontWeight: FontWeight.normal, fontSize: 20),
                 textAlign: TextAlign.center,
               ),
               const Spacer(flex: 3),

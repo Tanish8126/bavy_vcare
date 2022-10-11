@@ -36,7 +36,9 @@ class _AppointmentFormState extends State<AppointmentForm> {
   final dobController = TextEditingController();
   final mobileController = TextEditingController();
   final emailController = TextEditingController();
-  final addressController = TextEditingController();
+  final address1Controller = TextEditingController();
+  final address2Controller = TextEditingController();
+  final pincodeController = TextEditingController();
 
   @override
   void dispose() {
@@ -45,18 +47,11 @@ class _AppointmentFormState extends State<AppointmentForm> {
     babynameController.dispose();
     dobController.dispose();
     mobileController.dispose();
-    addressController.dispose();
+    address1Controller.dispose();
+    address2Controller.dispose();
     emailController.dispose();
+    pincodeController.dispose();
     super.dispose();
-  }
-
-  clearText() {
-    nameController.clear();
-    babynameController.clear();
-    dobController.clear();
-    mobileController.clear();
-    emailController.clear();
-    addressController.clear();
   }
 
   void _showDatePicker() {
@@ -236,7 +231,7 @@ class _AppointmentFormState extends State<AppointmentForm> {
                               DefaultField(
                                 controller: emailController,
                                 keyboardtype: TextInputType.emailAddress,
-                                maxlength: null,
+                                maxlength: 20,
                                 validate: (value) {
                                   if (value!.isEmpty) {
                                     return 'Please Enter Email Address';
@@ -248,40 +243,19 @@ class _AppointmentFormState extends State<AppointmentForm> {
                                 labeltext: "Email Id",
                               ),
                               SizedBox(height: SizeConfig.screenHeight * 0.025),
-                              TextFormField(
-                                keyboardType: TextInputType.streetAddress,
-                                style:
-                                    const TextStyle(color: kPrimaryLightColor),
-                                controller: addressController,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please Enter Your Address';
-                                  }
-                                  return null;
-                                },
-                                decoration: InputDecoration(
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(30),
-                                    ),
-                                    fillColor: kTextColor,
-                                    labelText: "Address",
-                                    hintText: "Enter Your Address",
-                                    floatingLabelBehavior:
-                                        FloatingLabelBehavior.always,
-                                    hintStyle: const TextStyle(
-                                        color: kPrimaryLightColor),
-                                    labelStyle: const TextStyle(
-                                        color: kBlack,
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.bold)),
-                              ),
-                              SizedBox(height: SizeConfig.screenHeight * 0.025),
                               DefaultFormField(
                                 items: genders.map<DropdownMenuItem<String>>(
                                     (String value) {
                                   return DropdownMenuItem<String>(
                                     value: value,
-                                    child: Text(value),
+                                    child: Text(
+                                      value,
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                      ),
+                                    ),
                                   );
                                 }).toList(),
                                 value: genderValue,
@@ -300,7 +274,14 @@ class _AppointmentFormState extends State<AppointmentForm> {
                                     (String value) {
                                   return DropdownMenuItem<String>(
                                     value: value,
-                                    child: Text(value),
+                                    child: Text(
+                                      value,
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                      ),
+                                    ),
                                   );
                                 }).toList(),
                                 value: relationValue,
@@ -323,7 +304,7 @@ class _AppointmentFormState extends State<AppointmentForm> {
                                 child: Column(
                                   children: [
                                     const Text(
-                                      "Make Appointment",
+                                      "Fill Address",
                                       style: TextStyle(
                                           fontSize: 20,
                                           color: kBlack,
@@ -332,11 +313,69 @@ class _AppointmentFormState extends State<AppointmentForm> {
                                     SizedBox(
                                         height:
                                             SizeConfig.screenHeight * 0.025),
+                                    DefaultField(
+                                      controller: address1Controller,
+                                      keyboardtype: TextInputType.text,
+                                      maxlength: 15,
+                                      validate: (value) {
+                                        if (value!.isEmpty) {
+                                          return 'Please Enter Email Address';
+                                        }
+                                        return null;
+                                      },
+                                      hinttext: "Enter Flat or House Number",
+                                      prefix: null,
+                                      labeltext: "Address Line# 1",
+                                    ),
+                                    SizedBox(
+                                        height:
+                                            SizeConfig.screenHeight * 0.025),
+                                    DefaultField(
+                                      controller: address2Controller,
+                                      keyboardtype: TextInputType.text,
+                                      maxlength: 15,
+                                      validate: (value) {
+                                        if (value!.isEmpty) {
+                                          return 'Please Enter your Address';
+                                        }
+                                        return null;
+                                      },
+                                      hinttext: "Enter Street Address",
+                                      prefix: null,
+                                      labeltext: "Address Line# 2",
+                                    ),
+                                    SizedBox(
+                                        height:
+                                            SizeConfig.screenHeight * 0.025),
+                                    DefaultField(
+                                      controller: pincodeController,
+                                      keyboardtype: TextInputType.number,
+                                      maxlength: 6,
+                                      validate: (value) {
+                                        if (value!.isEmpty) {
+                                          return 'Please Enter valid Pincode';
+                                        }
+                                        return null;
+                                      },
+                                      hinttext: "Enter your Pincode",
+                                      prefix: null,
+                                      labeltext: "Email Pincode",
+                                    ),
+                                    SizedBox(
+                                        height:
+                                            SizeConfig.screenHeight * 0.025),
                                     DefaultFormField(
                                       items: snapshot.data!.docs.map((value) {
                                         return DropdownMenuItem(
                                           value: value.get('name'),
-                                          child: Text('${value.get('name')}'),
+                                          child: Text(
+                                            '${value.get('name')}',
+                                            style: const TextStyle(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black,
+                                            ),
+                                          ),
                                         );
                                       }).toList(),
                                       value: doctors,
@@ -373,24 +412,29 @@ class _AppointmentFormState extends State<AppointmentForm> {
                                       nameController.text;
                                       babynameController.text;
                                       mobileController.text;
-                                      addressController.text;
+                                      address1Controller.text;
+                                      address2Controller.text;
+                                      pincodeController.text;
                                       genderValue;
                                       relationValue;
                                       doctors;
                                       emailController.text;
 
                                       //clearText();
-                                      Navigator.of(context).push(
-                                          MaterialPageRoute(
+                                      Navigator.of(context)
+                                          .push(MaterialPageRoute(
                                               builder: (context) => BookingPage(
-                                                  nameController.text,
-                                                  mobileController.text,
-                                                  addressController.text,
-                                                  genderValue,
-                                                  babynameController.text,
-                                                  doctors,
-                                                  relationValue,
-                                                  emailController.text)));
+                                                    nameController.text,
+                                                    babynameController.text,
+                                                    mobileController.text,
+                                                    emailController.text,
+                                                    genderValue,
+                                                    relationValue,
+                                                    address1Controller.text,
+                                                    address2Controller.text,
+                                                    pincodeController.text,
+                                                    doctors,
+                                                  )));
                                     });
                                   }
                                 },

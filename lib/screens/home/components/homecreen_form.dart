@@ -1,6 +1,5 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'package:babyv_care/screens/past_booking_screen.dart';
 import 'package:babyv_care/utils/default_form_field.dart';
 import 'package:flutter/material.dart';
 
@@ -19,8 +18,9 @@ class HomeScreenForm extends StatefulWidget {
 class _HomeScreenFormState extends State<HomeScreenForm> {
   final _formKey = GlobalKey<FormState>();
 
-  String _selectedAge = "Birth";
+  String _selectedAge = "Select Baby's Age";
   var age = {
+    "Select Baby's Age": '0',
     "Birth": '1',
     "6 Weeks": '2',
     "10 Weeks": '3',
@@ -177,18 +177,20 @@ class _HomeScreenFormState extends State<HomeScreenForm> {
                     press: () {
                       if (_formKey.currentState!.validate()) {
                         //valid flow
+                        setState(() {
+                          _selectedAge;
+                          _selectedVaccine;
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => AppointmentForm(
+                                  _selectedAge, _selectedVaccine)));
+                        });
                       }
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) =>
-                              AppointmentForm(_selectedAge, _selectedVaccine)));
                     },
                   ),
                   SizedBox(height: SizeConfig.screenHeight * 0.025),
                   DefaultButton(
                     text: "Upload Document",
-                    press: () {
-                      Navigator.pushNamed(context, PastBookingScreen.routeName);
-                    },
+                    press: () {},
                   ),
                 ],
               ),

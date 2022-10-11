@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../home/homescreen.dart';
-import 'sign_in_screen.dart';
+import 'mobile_screen.dart';
 
 class LoginCheckScreen extends StatelessWidget {
   const LoginCheckScreen({Key? key}) : super(key: key);
