@@ -15,7 +15,7 @@ import '../screens/uploadscreen.dart';
 // We use name route
 // All our routes will be available here
 final Map<String, WidgetBuilder> routes = {
-  LoginScreen.routeName: (context) => const LoginScreen(),
+  LoginScreen.routeName: (context) => LoginScreen(),
   LoginCheckScreen.routeName: (context) => const LoginCheckScreen(),
   HomeScreen.routeName: (context) => const HomeScreen(),
   SplashScreen.routeName: (context) => const SplashScreen(),

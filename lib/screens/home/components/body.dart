@@ -7,14 +7,9 @@ import '../../../utils/size_config.dart';
 import 'welcome_banner.dart';
 import '../../notificationscreen.dart';
 
-class Body extends StatefulWidget {
+class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);
 
-  @override
-  State<Body> createState() => _BodyState();
-}
-
-class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

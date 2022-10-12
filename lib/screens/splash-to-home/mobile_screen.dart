@@ -8,15 +8,10 @@ import '../../utils/dafault_button.dart';
 import '../../utils/size_config.dart';
 import 'otp_screen.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends StatelessWidget {
   static String routeName = "/loginscreen";
 
-  const LoginScreen({Key? key}) : super(key: key);
-  @override
-  _LoginScreenState createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
+  LoginScreen({Key? key}) : super(key: key);
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController _controller = TextEditingController();

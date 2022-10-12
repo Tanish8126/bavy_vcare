@@ -7,14 +7,9 @@ import '../../../../utils/dafault_button2.dart';
 import '../../../../utils/size_config.dart';
 import '../../login_check.dart';
 
-class Body extends StatefulWidget {
+class Body extends StatelessWidget {
   const Body({super.key});
 
-  @override
-  _BodyState createState() => _BodyState();
-}
-
-class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(

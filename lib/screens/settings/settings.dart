@@ -78,8 +78,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
                   Navigator.pushAndRemoveUntil(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) => const LoginScreen()),
+                      MaterialPageRoute(builder: (context) => LoginScreen()),
                       (route) => false);
                 },
                 text: "Sign Out",
