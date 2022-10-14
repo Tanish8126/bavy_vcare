@@ -6,13 +6,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../controllers/bookingscreen_controller.dart';
 import '../utils/size_config.dart';
 import 'booking_screen.dart';
 
 class PastBookingScreen extends StatefulWidget {
   static String routeName = '/pastbookings';
 
-  PastBookingScreen({
+  const PastBookingScreen({
     Key? key,
   }) : super(key: key);
 
@@ -21,12 +22,6 @@ class PastBookingScreen extends StatefulWidget {
 }
 
 class _PastBookingScreenState extends State<PastBookingScreen> {
-  final Stream<QuerySnapshot> appointmentList = FirebaseFirestore.instance
-      .collection('bookings')
-      .where('userId', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
-      //.where("bookingEnd", isLessThan: DateTime.now().millisecondsSinceEpoch)
-      .snapshots();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,19 +69,20 @@ class _PastBookingScreenState extends State<PastBookingScreen> {
             color: Colors.black45,
           ),
           StreamBuilder<QuerySnapshot>(
-              stream: appointmentList,
+              stream: appointmentList2,
               builder: ((context, AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
                 }
-                if (snapshot.data!.docs.isEmpty) {
-                  return const Text(
-                    'No Upcoming Appointment',
-                    style: TextStyle(fontSize: 20),
-                  );
-                } else {
+                // if (snapshot.data!.docs.isEmpty) {
+                //   return const Text(
+                //     'No Upcoming Appointment',
+                //     style: TextStyle(fontSize: 20),
+                //   );
+                // }
+                else {
                   final List bookingdataold = [];
                   snapshot.data?.docs.map((DocumentSnapshot document) {
                     Map bookdataold = document.data() as Map<String, dynamic>;

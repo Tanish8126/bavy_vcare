@@ -2,10 +2,10 @@
 
 import 'package:babyv_care/utils/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../controllers/bookingscreen_controller.dart';
 import '../utils/enums.dart';
 import '../utils/custtom_bottom_nav_bar.dart';
 import '../utils/size_config.dart';
@@ -23,12 +23,6 @@ class BookingScreen extends StatefulWidget {
 }
 
 class _BookingScreenState extends State<BookingScreen> {
-  final Stream<QuerySnapshot> appointmentList = FirebaseFirestore.instance
-      .collection('bookings')
-      .where('userId', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
-      //.where("bookingStart",  isGreaterThan: DateTime.now().millisecondsSinceEpoch)
-      .snapshots();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,12 +79,13 @@ class _BookingScreenState extends State<BookingScreen> {
                     child: CircularProgressIndicator(),
                   );
                 }
-                if (snapshot.data!.docs.isEmpty) {
-                  return const Text(
-                    'No Upcoming Appointment',
-                    style: TextStyle(fontSize: 20),
-                  );
-                } else {
+                // if (snapshot.data!.docs.isEmpty) {
+                //   return const Text(
+                //     'No Upcoming Appointment',
+                //     style: TextStyle(fontSize: 20),
+                //   );
+                // }
+                else {
                   final List bookingdatanew = [];
 
                   snapshot.data?.docs.map((DocumentSnapshot document) {
